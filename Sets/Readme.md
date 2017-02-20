@@ -8,7 +8,7 @@ In sets **NO duplicates** are allowed.
 
 **intersection(S, T)**: returns new set with elements found on set **S**, that also belong on set **T**, but no other elements. For instance, the intersection of sets  *S = { 2, 3, 4, 5 }*  and *T = { 1, 3, 6, 7, 8 }* is *U = { 3 }*.
 
-**union(S, T)**: returns new set **U** which contains all elements found both on set **S** and set **T**. As in sets no duplicates are allowed, **U** keeps only the first occurance of each element. For instance, the union of sets *S = { 2, 3, 4, 5 }* and *T = { 1, 3, 6, 7, 8 }* is *U = { 1, 2, 3, 4, 5, 6, 7, 8 }*.
+**union(S, T)**: returns new set **U** which contains all elements found both on set **S** and set **T**. As in sets no duplicates are allowed, **U** keeps only the first occurrence of each element. For instance, the union of sets *S = { 2, 3, 4, 5 }* and *T = { 1, 3, 6, 7, 8 }* is *U = { 1, 2, 3, 4, 5, 6, 7, 8 }*.
 
 **difference(S, T)**: returns new set which contains elements found on set **S**, but not on set **T**. For instance, the difference of sets *S = { 2, 3, 4, 5 }* and *T = { 1, 3, 6, 7, 8 }* denoted as *(S - T)* is *U = { 2, 4, 5 }*.
 
@@ -27,3 +27,15 @@ In sets **NO duplicates** are allowed.
 **add(x, S)**: adds the element **x** to **S**, if it is not present already.
 
 **remove(x, S)**: removes the element **x** from **S**, if it is present.
+
+### Implementing Set in C
+
+C has not a build in set data structure in it's core library. However, there are a number of ways, some more appropriate than others, to implement sets in C. Bellow, we list some implementation ideas, together with a time complexity table in big-O for each one. We start with the simpler one, and we'll move to more sophisticated implementations later.
+
+#### Using Arrays
+
+#### Using Bit Fields
+
+#### Using Linked Lists
+
+#### Using Red-Black trees
