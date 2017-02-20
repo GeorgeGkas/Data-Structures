@@ -24,6 +24,6 @@ In sets **NO duplicates** are allowed.
 
 **build_global(S)**: creates a new set structure that contains all the values of data type. For instance, if we want to create a set **S** that contains all the decimal numbers calling the `create(S)` function, **S** will initialize as empty set. *S = {}}* After calling the `build_global(S)` function, **S** will contain all the numbers from 0 through 9. *S = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}*.
 
-**add(S, x)**: adds the element **x** to **S**, if it is not present already.
+**add(x, S)**: adds the element **x** to **S**, if it is not present already.
 
-**remove(S, x)**: removes the element **x** from **S**, if it is present.
+**remove(x, S)**: removes the element **x** from **S**, if it is present.
