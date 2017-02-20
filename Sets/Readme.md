@@ -30,11 +30,16 @@ In sets **NO duplicates** are allowed.
 
 ### Implementing Set in C
 
-C has not a build in set data structure in it's core library. However, there are a number of ways, some more appropriate than others, to implement sets in C. Bellow, we list some implementation ideas, together with a time complexity table in big-O for each one. We start with the simpler one, and we'll move to more sophisticated implementations later.
+C has not a build in set data structure in it's core library. However, there are a number of ways, some more appropriate than others, to implement sets in C. Bellow, we list some implementation ideas, together with a time complexity table in big-O for each one. We start with the simplest approach, and we'll move to more sophisticated implementations later.
 
 #### Using Arrays
 
+If the maximum number of elements in the set is small enough, we can use a plain old array. This approach suits well on problems that handles sets with **small** amount of elements. Although, the word **small** here is tricky. How **small** you might consider a set depends on the amount of computer resources that are available for usage, so be careful when you are going to use this implementation.
+
 #### Using Bit Fields
+
+A better approach, well better from the space complexity scope, would be using bit-fields. This approach will give us the benefit to store more items in a set using the same implementation with ordinary arrays. The amount of space that will be saved depends on many factors and that's because C data types vary by implementation. In most cases, when we working with `unsigned int` type the amount of elements we can store using the same set size is **32 * N** elements more than the same array implementation, for a set of **N** elements. However, the truth is that the real number of space will be saved depends on the compiler.
+
 
 #### Using Linked Lists
 
