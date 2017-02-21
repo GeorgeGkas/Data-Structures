@@ -6,27 +6,43 @@ In sets **NO duplicates** are allowed.
 
 ### Basic operation on sets
 
-**intersection(S, T)**: returns new set with elements found on set **S**, that also belong on set **T**, but no other elements. For instance, the intersection of sets  *S = { 2, 3, 4, 5 }*  and *T = { 1, 3, 6, 7, 8 }* is *U = { 3 }*.
+**createSet(S, n)**: creates a set structure **S** capable of holding up to **n** elements.
 
-**union(S, T)**: returns new set **U** which contains all elements found both on set **S** and set **T**. As in sets no duplicates are allowed, **U** keeps only the first occurrence of each element. For instance, the union of sets *S = { 2, 3, 4, 5 }* and *T = { 1, 3, 6, 7, 8 }* is *U = { 1, 2, 3, 4, 5, 6, 7, 8 }*.
+**buildSet(S, x1, x2, x3, ...)**: creates a set structure **S** with values x1,x2, x3,….
 
-**difference(S, T)**: returns new set which contains elements found on set **S**, but not on set **T**. For instance, the difference of sets *S = { 2, 3, 4, 5 }* and *T = { 1, 3, 6, 7, 8 }* denoted as *(S - T)* is *U = { 2, 4, 5 }*.
+**addElementInSet(x, S)**: adds the element **x** to **S**, if it is not present already.
 
-**subset(S, T)**: check if all elements in set **S** are also elements of set **T** and returns a truth value (either `true` or `false`). For instance, the set *S = { 1, 2 }* is subset of *T = { 1, 2, 3 }*.
+**removeElementFromSet(x, S)**: removes the element **x** from **S**, if it is present.
 
-**isElementOf(x, S)**: checks whether the value **x** is in the set **S** and returns a truth value (either `true` or `false`).
+**capacityOfSet(S)**: returns the maximum number of values that **S** can hold. *Used only when a set is initialized with `createSet()` function.*
 
-**isEmpty(S)**: checks whether the set **S** contains no elements and returns a truth value (either `true` or `false`).
+**sizeOfSet(S)**: returns the number of elements in **S**.
 
-**equal(S1, S2)**: checks if sets **S1** and **S2** contain all and only the same elements. 
+**intersectionSet(S, T)**: returns new set with elements found on set **S**, that also belong on set **T**, but no other elements. For instance, the intersection of sets  *S = { 2, 3, 4, 5 }*  and *T = { 1, 3, 6, 7, 8 }* is *U = { 3 }*.
 
-**create(S)**: creates a new, initially empty set structure. 
+**unionSet(S, T)**: returns new set **U** which contains all elements found both on set **S** and set **T**. As in sets no duplicates are allowed, **U** keeps only the first occurrence of each element. For instance, the union of sets *S = { 2, 3, 4, 5 }* and *T = { 1, 3, 6, 7, 8 }* is *U = { 1, 2, 3, 4, 5, 6, 7, 8 }*.
 
-**buildGlobal(S)**: creates a new set structure that contains all the values of a type. For instance, if we want to create a set **S** that contains all the digits of base 10 system, calling `create(S)`, **S** will be initialized as empty set *S = { }*. After calling the `buildGlobal(S)` function, **S** will contain all the numbers from 0 through 9, which means *S = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }*.
+**differenceSet(S, T)**: returns new set which contains elements found on set **S**, but not on set **T**. For instance, the difference of sets *S = { 2, 3, 4, 5 }* and *T = { 1, 3, 6, 7, 8 }* denoted as *(S - T)* is *U = { 2, 4, 5 }*.
 
-**add(x, S)**: adds the element **x** to **S**, if it is not present already.
+**subSet(S, T)**: check if all elements in set **S** are also elements of set **T** and returns a truth value (either `true` or `false`). For instance, the set *S = { 1, 2 }* is subset of *T = { 1, 2, 3 }*.
 
-**remove(x, S)**: removes the element **x** from **S**, if it is present.
+**isElementOfSet(x, S)**: checks whether the value **x** is in the set **S** and returns a truth value (either `true` or `false`).
+
+**isEmptySet(S)**: checks whether the set **S** contains no elements and returns a truth value (either `true` or `false`).
+
+**equalSets(S1, S2)**: checks if sets **S1** and **S2** contain all and only the same elements. 
+
+**createSetWithCapacity(S, n)**: creates a new, initially empty, set structure capable of holding up to **n** elements.
+
+**clearSet(S)**: delete all elements of **S**.
+
+**sumOfSet(S)**: returns the sum of all elements of **S**.
+
+**minSet(S)**: returns the minimum element of **S**.
+
+**maxSet(S)**: returns the maximum element of **S**.
+
+**nearest(S, x)**: returns the element of **S** that is closest in value to **x**. 
 
 ### Implementing Set in C
 
@@ -38,8 +54,7 @@ If the maximum number of elements in the set is small enough, we can use a plain
 
 #### Using Bit Fields
 
-A better approach, well better from the space complexity scope, would be using bit-fields. This approach will give us the benefit to store more items in a set using the same implementation with ordinary arrays. The amount of space that will be saved depends on many factors and that's because C data types vary by implementation. In most cases, when we working with `unsigned int` type the amount of elements we can store using the same set size is **32 * N** elements more than the same array implementation, for a set of **N** elements. However, the truth is that the real number of space will be saved depends on the compiler.
-
+A better approach, well better from the space complexity scope, would be using bit-fields. This approach will give us the benefit to store more items in a set, in contrast to the same implementation with ordinary arrays. The amount of space that will be saved depends on many factors and that's because C data types vary by implementation. The truth is that the real number of space will be saved depends on the compiler and/or the system architecture (x64 or x86).
 
 #### Using Linked Lists
 
