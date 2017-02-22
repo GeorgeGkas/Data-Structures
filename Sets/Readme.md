@@ -40,7 +40,10 @@ In sets **NO duplicates** are allowed.
 
 **maxSet(S)**: returns the maximum element of **S**.
 
-**nearest(S, x)**: returns the element of **S** that is closest in value to **x**. 
+**nearestInSet(S, x)**: returns the element of **S** that is closest in value to **x**. 
+
+**reduceSet(S, f, x)** and **f(index, x)**: iterates through every element in set **S** passing each element found in function **f**. In **f** we need two parameters. The first one **index** is the element from the set **S**. **x** is used as return value (for example you do some manipulations and want to return the final value back to caller function). `reduceSet()` should be called only in initialized sets.
+
 
 ### Implementing Set in C
 

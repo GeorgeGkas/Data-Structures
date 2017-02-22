@@ -110,3 +110,9 @@ int addElementInSet(Set *S, int x) {
 
     return 0;
 }
+
+void reduceSet(Set *S, void (*f)(int, void *), void *x) {
+    for (int i = 0; i < S->size; ++i) {
+        f(S->elems[i], x);
+    }
+}

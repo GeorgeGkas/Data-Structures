@@ -32,3 +32,10 @@ void createSetWithCapacity(Set *S, int n);
  * if it is not present already.
  */
 int addElementInSet(Set *S, int x);
+
+/**
+ * Iterate every element in S and pass it to function S.
+ * x is used in case we want to return a result from f
+ * back to our caller function.
+ */
+void reduceSet(Set *S, void (*f)(int, void *), void *x);

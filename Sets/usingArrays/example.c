@@ -1,5 +1,9 @@
 #include "setsUsingArray.h"
 
+void reduceCallback(int index, void *x) {
+    printf("%c\n", index);
+}
+
 int main(void) {
     /**
      * Bellow we define our set.
@@ -70,6 +74,12 @@ int main(void) {
         printf("%c\n", S.elems[i]);
     }
 
+    /**
+     * We also can use reduceSet function to print our
+     * results.
+     */
+    reduceSet(&S, reduceCallback, NULL);
+
     clearSet(&S);
 
     /**
@@ -86,9 +96,7 @@ int main(void) {
     /**
      * Print our set.
      */
-    for (int i = 0; i < 26; ++i) {
-        printf("%c\n", S.elems[i]);
-    }
+    reduceSet(&S, reduceCallback, NULL);
 
     clearSet(&S);
 
