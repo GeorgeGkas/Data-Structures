@@ -8,7 +8,7 @@ In sets **NO duplicates** are allowed.
 
 **createSet(S, n)**: creates a set structure **S** capable of holding up to **n** elements.
 
-**buildSet(S, x1, x2, x3, ...)**: creates a set structure **S** with values x1,x2, x3,….
+**buildSet(S, n, x1, x2, x3, ...)**: creates a set structure **S** with **n** values x1,x2, x3,….
 
 **addElementInSet(x, S)**: adds the element **x** to **S**, if it is not present already.
 
