@@ -6,8 +6,6 @@ In sets **NO duplicates** are allowed.
 
 ### Basic operation on sets
 
-**createSet(S, n)**: creates a set structure **S** capable of holding up to **n** elements.
-
 **buildSet(S, n, x1, x2, x3, ...)**: creates a set structure **S** with **n** elements x1,x2, x3,….
 
 **addElementInSet(S, x)**: adds the element **x** to **S**, if it is not present already.
@@ -34,7 +32,7 @@ In sets **NO duplicates** are allowed.
 
 **createSetWithCapacity(S, n)**: creates a new, initially empty, set structure capable of holding up to **n** elements.
 
-**deleteSet(S)**: delete all elements of **S**.
+**clearSet(S)**: delete all elements of **S**.
 
 **sumOfSet(S)**: returns the sum of all elements of **S**.
 

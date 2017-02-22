@@ -4,7 +4,7 @@ int main(void) {
     /**
     * Bellow we define our set.
     */
-    int *S;
+    Set S;
 
     /**
      * Build a set that contains all the capital letters of
@@ -19,19 +19,19 @@ int main(void) {
      * Print our set.
      */
     for (int i = 0; i < 26; ++i) {
-        printf("%c\n", S[i]);
+        printf("%c\n", S.elems[i]);
     }
 
     /**
      * Delete our set.
      * Now S is just an ordinary pointer.
      */
-    deleteSet(&S);
+    clearSet(&S);
 
     /**
      * Create a set for storing 5 elements.
      */
-    createSet(&S, 5);
+    createSetWithCapacity(&S, 5);
 
     return 0;
 }

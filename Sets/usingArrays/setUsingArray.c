@@ -1,6 +1,6 @@
 #include "setsUsingArray.h"
 
-void buildSet(int **S, int n, ...) {
+void buildSet(Set *S, int n, ...) {
     /**
      * Pass each argument, representing a set element,
      * from our variadic function to variadic list.
@@ -16,13 +16,13 @@ void buildSet(int **S, int n, ...) {
     /**
      * Allocates memmory for our set.
      */
-    *S = malloc(sizeof(int)*n);
+    S->elems = malloc(sizeof(int)*n);
 
     /**
      * Pass each set element, to our set.
      */
     for (int i = 0; i < n; ++i) {
-        *(*S+i) = va_arg(setElems, int);
+        S->elems[i] = va_arg(setElems, int);
     }
 
     /**
@@ -31,18 +31,18 @@ void buildSet(int **S, int n, ...) {
     va_end(setElems);
 }
 
-void deleteSet(int **S) {
+void clearSet(Set *S) {
     /**
      * Frees the allocated block memory used for
      * set elements.
      */
-    free(*S);
-    *S = NULL;
+    free(S->elems);
+    S->elems = NULL;
 }
 
-void createSet(int **S, int n) {
+void createSetWithCapacity(Set *S, int n) {
     /**
      * Allocates memmory for our set.
      */
-    *S = malloc(sizeof(int)*n);
+    S->elems = malloc(sizeof(int)*n);
 }
