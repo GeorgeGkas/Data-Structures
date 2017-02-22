@@ -34,7 +34,7 @@ In sets **NO duplicates** are allowed.
 
 **createSetWithCapacity(S, n)**: creates a new, initially empty, set structure capable of holding up to **n** elements.
 
-**clearSet(S)**: delete all elements of **S**.
+**deleteSet(S)**: delete all elements of **S**.
 
 **sumOfSet(S)**: returns the sum of all elements of **S**.
 
