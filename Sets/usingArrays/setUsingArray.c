@@ -14,7 +14,19 @@ void buildSet(Set *S, int n, ...) {
     va_start(setElems, n);
 
     /**
-     * Allocates memmory for our set.
+     * The number of elements in set structure.
+     */
+     S->size = n;
+
+    /**
+     * Using this function we don't restrict ourselves
+     * of using any number of elements for our set, so
+     * we "unset" maxSize member.
+     */
+     S->maxSize = -1;
+
+    /**
+     * Allocates memory for our set.
      */
     S->elems = malloc(sizeof(int)*n);
 
@@ -38,11 +50,60 @@ void clearSet(Set *S) {
      */
     free(S->elems);
     S->elems = NULL;
+
+    /**
+     * Zero the size of set.
+     */
+     S->size = 0;
+     S->maxSize = -1;
 }
 
 void createSetWithCapacity(Set *S, int n) {
     /**
-     * Allocates memmory for our set.
+     * Using this function we build a static
+     * set with n elements, so we want to set
+     * a maximum number of elements.
+     */
+     S->maxSize = n;
+
+     /**
+      * No elements exist yet.
+      */
+      S->size = 0;
+
+    /**
+     * Allocates memory for our set.
      */
     S->elems = malloc(sizeof(int)*n);
+}
+
+int addElementInSet(Set *S, int x) {
+    for (int i = 0; i < S->size; ++i) {
+        if (S->elems[i] == x) { /* Element already exist. */
+            return 1;
+        }
+    }
+
+    if (S->maxSize == -1) { /* We haven't set a maximum set size. */
+       goto add_element;
+    } else { /* We set a maximum set size.*/
+        if (S->size < S->maxSize) { /* If there is space to add one more element.*/
+            goto add_element;
+        } else {
+            return -2;
+        }
+    }
+
+    add_element:
+        /**
+         * 1) Update the size of set with one more element.
+         * 2) Reallocates memory for the new size.
+         * 3) Add the new element.
+         */
+        ++(S->size);
+        S->elems = realloc(S->elems, sizeof(int)*(S->size));
+        S->elems[(S->size)-1] = x;
+
+
+    return 0;
 }

@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stdbool.h>
 
 
 typedef struct {
-	int *elems;
-	int n;
+	int *elems; /* Array contains our set elements. */
+	int size; /* Number of elements exist in set. */
+	int maxSize; /* Maximum allowed number of elements in set. */
 } Set;
 
 /**
@@ -24,3 +26,9 @@ void clearSet(Set *S);
  * capable of holding up to n elements.
  */
 void createSetWithCapacity(Set *S, int n);
+
+/**
+ * Adds the element x to S, 
+ * if it is not present already.
+ */
+int addElementInSet(Set *S, int x);

@@ -6,7 +6,7 @@ In sets **NO duplicates** are allowed.
 
 ### Basic operation on sets
 
-**buildSet(S, n, x1, x2, x3, ...)**: creates a set structure **S** with **n** elements x1,x2, x3,….
+**buildSet(S, n, x1, x2, x3, ...)**: creates a set structure **S** with **n** elements x1,x2, x3,…. This function should be called on empty set, else there will be undefined behaviors. To use this function on set that already has been initialized with previous `createSetWithCapacity()` or `buildSet()` call, you have first to call `clearSet()`.
 
 **addElementInSet(S, x)**: adds the element **x** to **S**, if it is not present already.
 
@@ -30,9 +30,9 @@ In sets **NO duplicates** are allowed.
 
 **equalSets(S1, S2)**: checks if sets **S1** and **S2** contain all and only the same elements. 
 
-**createSetWithCapacity(S, n)**: creates a new, initially empty, set structure capable of holding up to **n** elements.
+**createSetWithCapacity(S, n)**: creates a new, initially empty, set structure capable of holding up to **n** elements. This function should be called on empty set, else there will be undefined behaviors. To use this function on set that already has been initialized with previous `createSetWithCapacity()` or `buildSet()` call, you have first to call `clearSet()`.
 
-**clearSet(S)**: delete all elements of **S**.
+**clearSet(S)**: delete all elements of **S**. This function should be called on **non empty** set, else there will be undefined behaviors.
 
 **sumOfSet(S)**: returns the sum of all elements of **S**.
 

@@ -2,18 +2,66 @@
 
 int main(void) {
     /**
-    * Bellow we define our set.
-    */
+     * Bellow we define our set.
+     */
     Set S;
 
     /**
+     * Return code.
+     */
+    int res;
+ 
+    /**
+     * Create a set for storing 5 elements.
+     */
+    createSetWithCapacity(&S, 5);
+
+    res = addElementInSet(&S, 'A');
+    if (res != 0) {
+        exit(-1);
+    }
+
+    res = addElementInSet(&S, 'B');
+    if (res != 0) {
+        exit(-1);
+    }
+
+    res = addElementInSet(&S, 'C');
+    if (res != 0) {
+        exit(-1);
+    }
+
+    res = addElementInSet(&S, 'D');
+    if (res != 0) {
+        exit(-1);
+    }
+
+    res = addElementInSet(&S, 'E');
+    if (res != 0) {
+        exit(-1);
+    }
+
+    /**
+     * Print our set.
+     */
+    for (int i = 0; i < 5; ++i) {
+        printf("%c\n", S.elems[i]);
+    }
+
+    /**
+     * Delete our set.
+     * Now S is empty.
+     */
+    clearSet(&S);
+
+    /**
      * Build a set that contains all the capital letters of
-     * the english alphabet.
+     * the English alphabet.
      */
     buildSet(&S, 26, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', \
-                       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', \
-                       'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', \
-                       'Y', 'Z');
+                     'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', \
+                     'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', \
+                     'Y', 'Z');
 
     /**
      * Print our set.
@@ -22,16 +70,27 @@ int main(void) {
         printf("%c\n", S.elems[i]);
     }
 
-    /**
-     * Delete our set.
-     * Now S is just an ordinary pointer.
-     */
     clearSet(&S);
 
     /**
-     * Create a set for storing 5 elements.
+     * The above procedure could be done like the following example.
      */
-    createSetWithCapacity(&S, 5);
+    buildSet(&S, 0);
+    for (int i = 65; i < 65+26; ++i) {
+        res = addElementInSet(&S, i);
+        if (res != 0) {
+            exit(-1);
+        }
+    }
+
+    /**
+     * Print our set.
+     */
+    for (int i = 0; i < 26; ++i) {
+        printf("%c\n", S.elems[i]);
+    }
+
+    clearSet(&S);
 
     return 0;
 }
