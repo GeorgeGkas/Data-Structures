@@ -85,17 +85,7 @@ int addElementInSet(Set *S, int x) {
     }
 
     if (S->maxSize == -1) { /* We haven't set a maximum set size. */
-       goto add_element;
-    } else { /* We set a maximum set size.*/
-        if (S->size < S->maxSize) { /* If there is space to add one more element.*/
-            goto add_element;
-        } else {
-            return -2;
-        }
-    }
-
-    add_element:
-        /**
+       /**
          * 1) Update the size of set with one more element.
          * 2) Reallocates memory for the new size.
          * 3) Add the new element.
@@ -103,7 +93,20 @@ int addElementInSet(Set *S, int x) {
         ++(S->size);
         S->elems = realloc(S->elems, sizeof(int)*(S->size));
         S->elems[(S->size)-1] = x;
-
+    } else { /* We set a maximum set size.*/
+        if (S->size < S->maxSize) { /* If there is space to add one more element.*/
+            /**
+             * 1) Update the size of set with one more element.
+             * 2) Reallocates memory for the new size.
+             * 3) Add the new element.
+             */
+            ++(S->size);
+            S->elems = realloc(S->elems, sizeof(int)*(S->size));
+            S->elems[(S->size)-1] = x;
+        } else {
+            return -2;
+        }
+    }
 
     return 0;
 }
