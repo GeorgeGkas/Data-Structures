@@ -15,6 +15,9 @@ int main(void) {
 				'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', \
 				'Y', 'Z');
 
+	/**
+	 * Print our set.
+	 */
 	for (int i = 0; i < 26; ++i) {
 		printf("%c\n", Set[i]);
 	}

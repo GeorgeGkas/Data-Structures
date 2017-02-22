@@ -8,13 +8,13 @@ In sets **NO duplicates** are allowed.
 
 **createSet(S, n)**: creates a set structure **S** capable of holding up to **n** elements.
 
-**buildSet(S, n, x1, x2, x3, ...)**: creates a set structure **S** with **n** values x1,x2, x3,….
+**buildSet(S, n, x1, x2, x3, ...)**: creates a set structure **S** with **n** elements x1,x2, x3,….
 
 **addElementInSet(x, S)**: adds the element **x** to **S**, if it is not present already.
 
 **removeElementFromSet(x, S)**: removes the element **x** from **S**, if it is present.
 
-**capacityOfSet(S)**: returns the maximum number of values that **S** can hold. *Used only when a set is initialized with `createSet()` function.*
+**capacityOfSet(S)**: returns the maximum number of elements that **S** can hold. *Used only when a set is initialized with `createSet()` function.*
 
 **sizeOfSet(S)**: returns the number of elements in **S**.
 
