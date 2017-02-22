@@ -10,9 +10,9 @@ In sets **NO duplicates** are allowed.
 
 **buildSet(S, n, x1, x2, x3, ...)**: creates a set structure **S** with **n** elements x1,x2, x3,….
 
-**addElementInSet(x, S)**: adds the element **x** to **S**, if it is not present already.
+**addElementInSet(S, x)**: adds the element **x** to **S**, if it is not present already.
 
-**removeElementFromSet(x, S)**: removes the element **x** from **S**, if it is present.
+**removeElementFromSet(S, x)**: removes the element **x** from **S**, if it is present.
 
 **capacityOfSet(S)**: returns the maximum number of elements that **S** can hold. *Used only when a set is initialized with `createSet()` function.*
 
@@ -26,7 +26,7 @@ In sets **NO duplicates** are allowed.
 
 **subSet(S, T)**: check if all elements in set **S** are also elements of set **T** and returns a truth value (either `true` or `false`). For instance, the set *S = { 1, 2 }* is subset of *T = { 1, 2, 3 }*.
 
-**isElementOfSet(x, S)**: checks whether the value **x** is in the set **S** and returns a truth value (either `true` or `false`).
+**isElementOfSet(S, t)**: checks whether the value **x** is in the set **S** and returns a truth value (either `true` or `false`).
 
 **isEmptySet(S)**: checks whether the set **S** contains no elements and returns a truth value (either `true` or `false`).
 
