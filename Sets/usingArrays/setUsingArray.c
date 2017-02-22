@@ -39,3 +39,10 @@ void deleteSet(int **S) {
     free(*S);
     *S = NULL;
 }
+
+void createSet(int **S, int n) {
+    /**
+     * Allocates memmory for our set.
+     */
+    *S = malloc(sizeof(int)*n);
+}

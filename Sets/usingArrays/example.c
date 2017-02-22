@@ -28,7 +28,10 @@ int main(void) {
      */
     deleteSet(&S);
 
-    
+    /**
+     * Create a set for storing 5 elements.
+     */
+    createSet(&S, 5);
 
     return 0;
 }
