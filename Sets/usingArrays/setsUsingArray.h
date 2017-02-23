@@ -44,3 +44,8 @@ void reduceSet(Set *S, void (*f)(int, void *), void *x);
  * Returns the number of elements in S.
  */
 size_t sizeOfSet(Set *S);
+
+/**
+ * Checks whether the set S contains no elements.
+ */
+int isEmptySet(Set *S);

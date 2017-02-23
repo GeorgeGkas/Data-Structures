@@ -26,7 +26,7 @@ In sets **NO duplicates** are allowed.
 
 **isElementOfSet(S, t)**: checks whether the value **x** is in the set **S** and returns a truth value (either `true` or `false`).
 
-**isEmptySet(S)**: checks whether the set **S** contains no elements and returns a truth value (either `true` or `false`).
+**isEmptySet(S)**: checks whether the set **S** contains no elements and returns either 0 (false) or 1 (true);
 
 **equalSets(S1, S2)**: checks if sets **S1** and **S2** contain all and only the same elements. 
 

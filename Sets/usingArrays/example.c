@@ -27,6 +27,12 @@ int main(void) {
     printf("%ld\n", setSize);
 
     /**
+     * Check if S is empty.
+     */
+    int empty = isEmptySet(&S);
+    printf("%d\n", empty);
+
+    /**
      * Add elements to set.
      */
     res = addElementInSet(&S, 'A');
@@ -56,6 +62,9 @@ int main(void) {
 
     setSize = sizeOfSet(&S);
     printf("%ld\n", setSize);
+
+    empty = isEmptySet(&S);
+    printf("%d\n", empty);
 
     /**
      * Print our set.

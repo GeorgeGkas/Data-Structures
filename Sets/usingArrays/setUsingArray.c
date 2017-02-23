@@ -120,3 +120,7 @@ void reduceSet(Set *S, void (*f)(int, void *), void *x) {
 size_t sizeOfSet(Set *S) {
     return S->size;
 }
+
+int isEmptySet(Set *S) {
+    return (S->size == 0);
+}
