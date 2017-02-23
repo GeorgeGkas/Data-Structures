@@ -6,8 +6,8 @@
 
 typedef struct {
 	int *elems; /* Array contains our set elements. */
-	int size; /* Number of elements exist in set. */
-	int maxSize; /* Maximum allowed number of elements in set. */
+	size_t size; /* Number of elements exist in set. */
+	size_t maxSize; /* Maximum allowed number of elements in set. */
 } Set;
 
 /**
