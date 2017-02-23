@@ -54,3 +54,9 @@ int isEmptySet(Set *S);
  * Returns the maximum number of elements that S can hold.
  */
 size_t capacityOfSet(Set *S);
+
+/**
+ * Removes the element x from S, 
+ * if it is present.
+ */
+int removeElementFromSet(Set *S, int x);

@@ -104,7 +104,7 @@ int addElementInSet(Set *S, int x) {
             S->elems = realloc(S->elems, sizeof(int)*(S->size));
             S->elems[(S->size)-1] = x;
         } else {
-            return -2;
+            return -1;
         }
     }
 
@@ -127,4 +127,36 @@ int isEmptySet(Set *S) {
 
 size_t capacityOfSet(Set *S) {
     return S->maxSize;
+}
+
+int removeElementFromSet(Set *S, int x) {
+    int xIndex;
+    bool xExist = false;
+    for (int i = 0; i < S->size; ++i) {
+        if (S->elems[i] == x) { /* Found the position of x. */
+            xIndex = i;
+            xExist = true;
+            break;
+        }
+    }
+
+    if (!xExist) { /* We could not found the x in S. Element does not exist. */
+        return 1;
+    }
+
+    /**
+     * 1) Update the size of set with one more element.
+     * 2) Move all elements after x one position back, as
+     *    the cell of x is not needed now.
+     * 3) Reallocate new size. This will delete the last 
+     *    array cell, which really dont need it, cause we moved
+     *    all elements back to one position.
+     */
+    --(S->size);
+    for (int i = xIndex; i < S->size; ++i) {
+        S->elems[i] = S->elems[i+1];
+    }
+    S->elems = realloc(S->elems, sizeof(int)*(S->size));
+
+    return 0;
 }

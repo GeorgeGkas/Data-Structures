@@ -46,6 +46,14 @@ int main(void) {
         exit(-1);
     }
 
+    /**
+     * Remove element from set.
+     */
+    res = removeElementFromSet(&S, 'A');
+    if (res != 0) {
+        exit(-1);
+    }
+
     res = addElementInSet(&S, 'B');
     if (res != 0) {
         exit(-1);
@@ -99,6 +107,11 @@ int main(void) {
      */
     capacitySet = capacityOfSet(&S);
     printf("%ld\n", capacitySet);
+
+    res = removeElementFromSet(&S, 'W');
+    if (res != 0) {
+        exit(-1);
+    }
 
     /**
      * Print our set.
