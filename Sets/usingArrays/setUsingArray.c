@@ -116,3 +116,7 @@ void reduceSet(Set *S, void (*f)(int, void *), void *x) {
         f(S->elems[i], x);
     }
 }
+
+size_t sizeOfSet(Set *S) {
+    return S->size;
+}

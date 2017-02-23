@@ -20,6 +20,15 @@ int main(void) {
      */
     createSetWithCapacity(&S, 5);
 
+    /**
+     * Get the size of set.
+     */
+    size_t setSize = sizeOfSet(&S);
+    printf("%ld\n", setSize);
+
+    /**
+     * Add elements to set.
+     */
     res = addElementInSet(&S, 'A');
     if (res != 0) {
         exit(-1);
@@ -44,6 +53,9 @@ int main(void) {
     if (res != 0) {
         exit(-1);
     }
+
+    setSize = sizeOfSet(&S);
+    printf("%ld\n", setSize);
 
     /**
      * Print our set.
