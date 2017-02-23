@@ -49,3 +49,8 @@ size_t sizeOfSet(Set *S);
  * Checks whether the set S contains no elements.
  */
 int isEmptySet(Set *S);
+
+/**
+ * Returns the maximum number of elements that S can hold.
+ */
+size_t capacityOfSet(Set *S);

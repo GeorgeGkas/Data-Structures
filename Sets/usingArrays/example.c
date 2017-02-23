@@ -27,6 +27,12 @@ int main(void) {
     printf("%ld\n", setSize);
 
     /**
+     * Get the max capacity of set.
+     */
+    size_t capacitySet = capacityOfSet(&S);
+    printf("%ld\n", capacitySet);
+
+    /**
      * Check if S is empty.
      */
     int empty = isEmptySet(&S);
@@ -87,6 +93,12 @@ int main(void) {
                      'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', \
                      'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', \
                      'Y', 'Z');
+
+    /**
+     * Get the max capacity of set.
+     */
+    capacitySet = capacityOfSet(&S);
+    printf("%ld\n", capacitySet);
 
     /**
      * Print our set.

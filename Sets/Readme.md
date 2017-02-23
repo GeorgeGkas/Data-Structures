@@ -12,7 +12,7 @@ In sets **NO duplicates** are allowed.
 
 **removeElementFromSet(S, x)**: removes the element **x** from **S**, if it is present.
 
-**capacityOfSet(S)**: returns the maximum number of elements that **S** can hold. *Used only when a set is initialized with `createSet()` function.*
+**capacityOfSet(S)**: returns the maximum number of elements that **S** can hold. If max capacity has not been set (eg you initialized the set using `buildSet()`) then returns `-1`.
 
 **sizeOfSet(S)**: returns the number of elements in **S**.
 

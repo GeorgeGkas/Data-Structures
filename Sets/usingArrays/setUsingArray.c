@@ -124,3 +124,7 @@ size_t sizeOfSet(Set *S) {
 int isEmptySet(Set *S) {
     return (S->size == 0);
 }
+
+size_t capacityOfSet(Set *S) {
+    return S->maxSize;
+}
