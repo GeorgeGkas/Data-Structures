@@ -9,6 +9,8 @@ typedef struct {
 	size_t size; /* Number of elements exist in set. */
 	long maxSize; /* Maximum allowed number of elements in set. */
 	long sum; /* Sum of all elements in set. */
+	int *min; /* The minimum element in set. */
+	int *max; /* The maximum element in set. */
 } Set;
 
 /**
@@ -66,3 +68,13 @@ int removeElementFromSet(Set *S, int x);
  * Returns the sum of all elements of S.
  */
 long sumOfSet(Set *S);
+
+/**
+ * Returns the minimum element of S.
+ */
+int minSet(Set *S);
+
+/**
+ * Returns the maximum element of S.
+ */
+int maxSet(Set *S);

@@ -53,6 +53,15 @@ int main(void) {
     }
 
     /**
+     * Show min and max element in set.
+     */
+    int setMin = minSet(&S);
+    printf("%d\n", setMin);
+
+    int setMax = maxSet(&S);
+    printf("%d\n", setMax);
+
+    /**
      * Remove element from set.
      */
     res = removeElementFromSet(&S, 'A');
@@ -79,6 +88,12 @@ int main(void) {
     if (res != 0) {
         exit(-1);
     }
+
+    setMin = minSet(&S);
+    printf("%d\n", setMin);
+
+    setMax = maxSet(&S);
+    printf("%d\n", setMax);
 
     setSize = sizeOfSet(&S);
     printf("%ld\n", setSize);
@@ -107,6 +122,13 @@ int main(void) {
                      'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', \
                      'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', \
                      'Y', 'Z');
+
+
+    setMin = minSet(&S);
+    printf("%d\n", setMin);
+
+    setMax = maxSet(&S);
+    printf("%d\n", setMax);
 
     /**
      * Get the max capacity of set.

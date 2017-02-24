@@ -38,12 +38,31 @@ void buildSet(Set *S, int n, ...) {
     S->elems = malloc(sizeof(int)*n);
 
     /**
+      * 1) Pass the first element to set.
+      * 2) Update sum counter.
+      * 3) Set the first set element to be both minimum and maximum 
+      * element in set.
+      */
+    S->elems[0] = va_arg(setElems, int);
+    S->sum += S->elems[0];
+    S->min = S->max = &(S->elems[0]);
+
+    /**
      * Pass each set element, to our set
      * and update the sum counter.
+     * Also update min and max elements.
      */
-    for (int i = 0; i < n; ++i) {
+    for (int i = 1; i < n; ++i) {
         S->elems[i] = va_arg(setElems, int);
         S->sum += S->elems[i];
+
+        if (S->elems[i] < *(S->min)) {
+            S->min = &(S->elems[i]);
+        }
+
+        if (S->elems[i] > *(S->max)) {
+            S->max = &(S->elems[i]);
+        }
     }
 
     /**
@@ -61,11 +80,12 @@ void clearSet(Set *S) {
     S->elems = NULL;
 
     /**
-     * Zero the size of set.
+     * Zero set values.
      */
      S->size = 0;
      S->maxSize = -1;
      S->sum = 0;
+     S->min = S->max = NULL;
 }
 
 void createSetWithCapacity(Set *S, int n) {
@@ -87,6 +107,11 @@ void createSetWithCapacity(Set *S, int n) {
      * in O(1) time.
      */
      S->sum = 0;
+
+     /**
+      * No elements means no min and max value.
+      */
+    S->min = S->max = NULL;
 
     /**
      * Allocates memory for our set.
@@ -132,6 +157,23 @@ int addElementInSet(Set *S, int x) {
      */
      S->sum += x;
 
+    /**
+     * If x is the first element in set,
+     * use it as min and max, else check x 
+     * with the current min and max.
+     */
+    if (S->min == NULL) {
+        S->min = S->max = &(S->elems[(S->size)-1]);
+    } else {
+        if (x < *(S->min)) {
+            S->min = &(S->elems[(S->size)-1]);
+        }
+
+        if (x > *(S->max)) {
+            S->max = &(S->elems[(S->size)-1]);
+        }
+    }
+
     return 0;
 }
 
@@ -173,7 +215,7 @@ int removeElementFromSet(Set *S, int x) {
      * 2) Move all elements after x one position back, as
      *    the cell of x is not needed now.
      * 3) Reallocate new size. This will delete the last 
-     *    array cell, which really dont need it, cause we moved
+     *    array cell, which really don't need it, cause we moved
      *    all elements back to one position.
      */
     --(S->size);
@@ -190,9 +232,36 @@ int removeElementFromSet(Set *S, int x) {
      */
      S->sum -= x;
 
+     /**
+      * Check if the removed element is the current
+      * min or max one. If it is, then check the set
+      * to find the new min or max value.
+      */
+    if (x == *(S->min)) {
+        for (int i = 0; i < S->size; ++i) {
+            if (S->elems[i] < *(S->min)) {
+                S->min = &(S->elems[i]);
+            }
+        }
+     } else if (x == *(S->max)) {
+        for (int i = 0; i < S->size; ++i) {
+            if (S->elems[i] > *(S->max)) {
+                S->max = &(S->elems[i]);
+            }
+        }
+     }
+ 
     return 0;
 }
 
 long sumOfSet(Set *S) {
     return S->sum;
+}
+
+int minSet(Set *S) {
+    return *(S->min);
+}
+
+int maxSet(Set *S) {
+    return *(S->max);
 }
