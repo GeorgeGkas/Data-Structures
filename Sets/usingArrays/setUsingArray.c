@@ -25,16 +25,25 @@ void buildSet(Set *S, int n, ...) {
      */
      S->maxSize = -1;
 
+     /**
+     * We initialize the sum counter. This will
+     * allow us to get the sum using sumOfSet()
+     * in O(1) time.
+     */
+     S->sum = 0;
+
     /**
      * Allocates memory for our set.
      */
     S->elems = malloc(sizeof(int)*n);
 
     /**
-     * Pass each set element, to our set.
+     * Pass each set element, to our set
+     * and update the sum counter.
      */
     for (int i = 0; i < n; ++i) {
         S->elems[i] = va_arg(setElems, int);
+        S->sum += S->elems[i];
     }
 
     /**
@@ -56,6 +65,7 @@ void clearSet(Set *S) {
      */
      S->size = 0;
      S->maxSize = -1;
+     S->sum = 0;
 }
 
 void createSetWithCapacity(Set *S, int n) {
@@ -66,10 +76,17 @@ void createSetWithCapacity(Set *S, int n) {
      */
      S->maxSize = n;
 
-     /**
-      * No elements exist yet.
-      */
-      S->size = 0;
+    /**
+     * No elements exist yet.
+     */
+     S->size = 0;
+
+    /**
+     * We initialize the sum counter. This will
+     * allow us to get the sum using sumOfSet()
+     * in O(1) time.
+     */
+     S->sum = 0;
 
     /**
      * Allocates memory for our set.
@@ -108,6 +125,13 @@ int addElementInSet(Set *S, int x) {
         }
     }
 
+    /**
+     * We update the sum counter. This will
+     * allow us to get the sum using sumOfSet()
+     * in O(1) time.
+     */
+     S->sum += x;
+
     return 0;
 }
 
@@ -125,7 +149,7 @@ int isEmptySet(Set *S) {
     return (S->size == 0);
 }
 
-size_t capacityOfSet(Set *S) {
+long capacityOfSet(Set *S) {
     return S->maxSize;
 }
 
@@ -158,5 +182,17 @@ int removeElementFromSet(Set *S, int x) {
     }
     S->elems = realloc(S->elems, sizeof(int)*(S->size));
 
+
+    /**
+     * We update the sum counter. This will
+     * allow us to get the sum using sumOfSet()
+     * in O(1) time.
+     */
+     S->sum -= x;
+
     return 0;
+}
+
+long sumOfSet(Set *S) {
+    return S->sum;
 }

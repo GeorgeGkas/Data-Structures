@@ -21,6 +21,12 @@ int main(void) {
     createSetWithCapacity(&S, 5);
 
     /**
+     * Print set sum.
+     */
+    long setSum = sumOfSet(&S);
+    printf("%ld\n", setSum);
+
+    /**
      * Get the size of set.
      */
     size_t setSize = sizeOfSet(&S);
@@ -29,7 +35,7 @@ int main(void) {
     /**
      * Get the max capacity of set.
      */
-    size_t capacitySet = capacityOfSet(&S);
+    long capacitySet = capacityOfSet(&S);
     printf("%ld\n", capacitySet);
 
     /**
@@ -108,6 +114,12 @@ int main(void) {
     capacitySet = capacityOfSet(&S);
     printf("%ld\n", capacitySet);
 
+    /**
+     * Print set sum.
+     */
+    setSum = sumOfSet(&S);
+    printf("%ld\n", setSum);
+
     res = removeElementFromSet(&S, 'W');
     if (res != 0) {
         exit(-1);
@@ -143,6 +155,12 @@ int main(void) {
      * Print our set.
      */
     reduceSet(&S, reduceCallback, NULL);
+
+    /**
+     * Print set sum.
+     */
+    setSum = sumOfSet(&S);
+    printf("%ld\n", setSum);
 
     clearSet(&S);
 

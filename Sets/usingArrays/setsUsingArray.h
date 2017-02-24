@@ -7,7 +7,8 @@
 typedef struct {
 	int *elems; /* Array contains our set elements. */
 	size_t size; /* Number of elements exist in set. */
-	size_t maxSize; /* Maximum allowed number of elements in set. */
+	long maxSize; /* Maximum allowed number of elements in set. */
+	long sum; /* Sum of all elements in set. */
 } Set;
 
 /**
@@ -53,10 +54,15 @@ int isEmptySet(Set *S);
 /**
  * Returns the maximum number of elements that S can hold.
  */
-size_t capacityOfSet(Set *S);
+long capacityOfSet(Set *S);
 
 /**
  * Removes the element x from S, 
  * if it is present.
  */
 int removeElementFromSet(Set *S, int x);
+
+/**
+ * Returns the sum of all elements of S.
+ */
+long sumOfSet(Set *S);
