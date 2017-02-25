@@ -189,7 +189,11 @@ int main(void) {
     /**
      * Check sets equality.
      */
-    buildSet(&S, 6, 5, 20, 2, 3, -8, -8);
+    buildSet(&S, 5, 5, 20, 2, 3, -8);
+
+    for (int i = 0; i < 5; ++i) {
+        printf("%d\n", S.elems[i]);
+    }
 
     Set S1;
     buildSet(&S1, 5, 20, 5, -8, 3, 2);

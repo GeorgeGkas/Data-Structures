@@ -362,7 +362,7 @@ int isElementOfSet(Set *S, int x) {
      * to find if x belongs to S.
      */
     int middle, left = 0, right = (S->size)-1;
-    while (left < right) {
+    while (left <= right) {
         middle = (left + right)/2;
         if (S->elems[middle] == x) {
             return 1;
