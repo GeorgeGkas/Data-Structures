@@ -13,7 +13,7 @@ static int comparator_ascending(const void * elem1, const void * elem2) {
     return (f > s) - (f < s);
 }
 
-void buildSet(Set *S, int n, ...) {
+void buildSet(Set *S, size_t n, ...) {
     /**
      * Pass each argument, representing a set element,
      * from our variadic function to variadic list.
@@ -61,7 +61,7 @@ void buildSet(Set *S, int n, ...) {
      * Pass each set element, to our set
      * and update the sum counter.
      */
-    for (int i = 1; i < n; ++i) {
+    for (size_t i = 1; i < n; ++i) {
         S->elems[i] = va_arg(setElems, int);
         S->sum += S->elems[i];
     }
@@ -104,7 +104,7 @@ void clearSet(Set *S) {
      S->min = S->max = NULL;
 }
 
-void createSetWithCapacity(Set *S, int n) {
+void createSetWithCapacity(Set *S, size_t n) {
     /**
      * Using this function we build a static
      * set with n elements, so we want to set
@@ -136,7 +136,7 @@ void createSetWithCapacity(Set *S, int n) {
 }
 
 int addElementInSet(Set *S, int x) {
-    for (int i = 0; i < S->size; ++i) {
+    for (size_t i = 0; i < S->size; ++i) {
         if (S->elems[i] == x) { /* Element already exist. */
             return 1;
         }
@@ -148,12 +148,12 @@ int addElementInSet(Set *S, int x) {
          * last element that was smallest than x.
          * That way we can know in which place we insert x.
          */
-        int xIndex = 0;
-        for (int i = 0; i < S->size; ++i) {
+        long xIndex = 0;
+        for (size_t i = 0; i < S->size; ++i) {
             if (S->elems[i] > x) {
                 break;
             }
-            xIndex = i;
+            xIndex = (long)i;
         }
 
        /**
@@ -168,7 +168,7 @@ int addElementInSet(Set *S, int x) {
          * one place to right. If there is no element then
          * we just skip the operation.
          */
-        for (int i = S->size-2; i > xIndex; --i) {
+        for (long i = S->size-2; i > xIndex; --i) {
             S->elems[i+1] = S->elems[i];
         }
 
@@ -190,12 +190,12 @@ int addElementInSet(Set *S, int x) {
              * last element that was smallest than x.
              * That way we can now in which place we insert x.
              */
-            int xIndex = 0;
-            for (int i = 0; i < S->size; ++i) {
+            long xIndex = 0;
+            for (size_t i = 0; i < S->size; ++i) {
                 if (S->elems[i] > x) {
                     break;
                 }
-                xIndex = i;
+                xIndex = (long)i;
             }
 
            /**
@@ -210,7 +210,7 @@ int addElementInSet(Set *S, int x) {
              * one place to right. If there is no element then
              * we just skip the operation.
              */
-            for (int i = S->size-2; i > xIndex; --i) {
+            for (long i = S->size-2; i > xIndex; --i) {
                 S->elems[i+1] = S->elems[i];
             }
 
@@ -249,7 +249,7 @@ int addElementInSet(Set *S, int x) {
 }
 
 void reduceSet(Set *S, void (*f)(int, void *), void *x) {
-    for (int i = 0; i < S->size; ++i) {
+    for (size_t i = 0; i < S->size; ++i) {
         f(S->elems[i], x);
     }
 }
@@ -267,9 +267,9 @@ long capacityOfSet(Set *S) {
 }
 
 int removeElementFromSet(Set *S, int x) {
-    int xIndex;
+    size_t xIndex;
     bool xExist = false;
-    for (int i = 0; i < S->size; ++i) {
+    for (size_t i = 0; i < S->size; ++i) {
         if (S->elems[i] == x) { /* Found the position of x. */
             xIndex = i;
             xExist = true;
@@ -290,7 +290,7 @@ int removeElementFromSet(Set *S, int x) {
      *    all elements back to one position.
      */
     --(S->size);
-    for (int i = xIndex; i < S->size; ++i) {
+    for (size_t i = xIndex; i < S->size; ++i) {
         S->elems[i] = S->elems[i+1];
     }
     S->elems = realloc(S->elems, sizeof(int)*(S->size));
@@ -307,9 +307,15 @@ int removeElementFromSet(Set *S, int x) {
      * Update the values of min and max
      * with the first and last element in set-array. 
      * This is possible by the time we keep our set-array sorted.
+     * If size is zero, the last element is set was just removed,
+     * then there is no min and max.
      */
-    S->min = &(S->elems[0]);
-    S->max = &(S->elems[(S->size)-1]);
+    if (S->size == 0) {
+        S->min = S->max = NULL;
+    } else {
+        S->min = &(S->elems[0]);
+        S->max = &(S->elems[(S->size)-1]);
+    }
  
     return 0;
 }

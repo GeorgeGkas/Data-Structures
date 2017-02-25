@@ -17,7 +17,7 @@ typedef struct {
  * Creates a set structure S 
  * with n elements x1,x2, x3,….
  */
-void buildSet(Set *S, int n, ...);
+void buildSet(Set *S, size_t n, ...);
 
 /**
  * Delete all elements of S.
@@ -28,7 +28,7 @@ void clearSet(Set *S);
  * Creates a set structure S 
  * capable of holding up to n elements.
  */
-void createSetWithCapacity(Set *S, int n);
+void createSetWithCapacity(Set *S, size_t n);
 
 /**
  * Adds the element x to S, 
