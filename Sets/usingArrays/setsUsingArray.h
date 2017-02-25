@@ -85,3 +85,8 @@ int maxSet(Set *S);
  * and only the same elements. 
  */
 int equalSets(Set *S1, Set *S2);
+
+/**
+ * Checks whether the value x is in the set S.
+ */
+int isElementOfSet(Set *S, int x);

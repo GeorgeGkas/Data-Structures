@@ -204,5 +204,8 @@ int main(void) {
 
     printf("%d\n", equalSets(&S, &S1));
 
+    printf("%d\n", isElementOfSet(&S, 2));
+    printf("%d\n", isElementOfSet(&S, 3));
+
     return 0;
 }

@@ -355,3 +355,25 @@ int equalSets(Set *S1, Set *S2) {
 
     return 1;
 }
+
+int isElementOfSet(Set *S, int x) {
+    /**
+     * We use binary search in our array-set
+     * to find if x belongs to S.
+     */
+    int middle, left = 0, right = (S->size)-1;
+    while (left < right) {
+        middle = (left + right)/2;
+        if (S->elems[middle] == x) {
+            return 1;
+        } else {
+            if (S->elems[middle] > x) {
+                right = middle - 1;
+            } else {
+                left = middle + 1;
+            }
+        }
+    }
+
+    return 0;
+}
