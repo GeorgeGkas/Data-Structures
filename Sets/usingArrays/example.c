@@ -69,7 +69,12 @@ int main(void) {
         exit(-1);
     }
 
-    res = addElementInSet(&S, 'B');
+    res = addElementInSet(&S, 'D');
+    if (res != 0) {
+        exit(-1);
+    }
+
+    res = addElementInSet(&S, 'E');
     if (res != 0) {
         exit(-1);
     }
@@ -79,12 +84,7 @@ int main(void) {
         exit(-1);
     }
 
-    res = addElementInSet(&S, 'D');
-    if (res != 0) {
-        exit(-1);
-    }
-
-    res = addElementInSet(&S, 'E');
+    res = addElementInSet(&S, 'B');
     if (res != 0) {
         exit(-1);
     }
@@ -98,13 +98,16 @@ int main(void) {
     setSize = sizeOfSet(&S);
     printf("%ld\n", setSize);
 
+    setSum = sumOfSet(&S);
+    printf("%ld\n", setSum);
+
     empty = isEmptySet(&S);
     printf("%d\n", empty);
 
     /**
      * Print our set.
      */
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < S.size; ++i) {
         printf("%c\n", S.elems[i]);
     }
 
@@ -150,7 +153,7 @@ int main(void) {
     /**
      * Print our set.
      */
-    for (int i = 0; i < 26; ++i) {
+    for (int i = 0; i < S.size; ++i) {
         printf("%c\n", S.elems[i]);
     }
 
@@ -189,9 +192,9 @@ int main(void) {
     /**
      * Check sets equality.
      */
-    buildSet(&S, 5, 5, 20, 2, 3, -8);
+    buildSet(&S, 6, 5, 20, -8, 2, 3, -8);
 
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < S.size; ++i) {
         printf("%d\n", S.elems[i]);
     }
 

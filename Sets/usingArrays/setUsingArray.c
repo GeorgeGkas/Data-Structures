@@ -1,7 +1,7 @@
 #include "setsUsingArray.h"
 
 /**
- * Used as comparator function of qsort to
+ * Used as comparator function of qsort() to
  * sort the elements in ascending order.
  * Return 1 if f > s.
  * Return 0 if f = s.
@@ -11,6 +11,37 @@ static int comparator_ascending(const void *elem1, const void *elem2) {
     int f = *((int*)elem1);
     int s = *((int*)elem2);
     return (f > s) - (f < s);
+}
+
+/**
+ * Swap two elements that belongs to set.
+ */
+static void swapSetElements(int *E1, int *E2) {
+    int tmp = (*E1);
+    (*E1) = (*E2);
+    (*E2) = tmp;
+}
+
+/**
+ * lastSort is a variation of insert sort algorithm.
+ * We take the newly added element which is in the last
+ * position of our array-set and we move it to the left
+ * until we find it's position.
+ */
+static void lastSort_ascending(Set *S, int x) {
+    /**
+     * 1) Update the size of set with one more element.
+     * 2) Reallocates memory for the new size.
+     * 3) Add x in the end of the array-set.
+     * 4) Position the x in the correct place.
+     */
+    ++(S->size);
+    S->elems = realloc(S->elems, sizeof(int)*(S->size));
+    S->elems[(S->size)-1] = x;
+
+    for (size_t i = (S->size)-1; i > 0 && S->elems[i] < S->elems[i-1]; --i ) {
+        swapSetElements(&(S->elems[i]), &(S->elems[i-1]));
+    }
 }
 
 void buildSet(Set *S, size_t n, ...) {
@@ -29,7 +60,7 @@ void buildSet(Set *S, size_t n, ...) {
     /**
      * The number of elements in set structure.
      */
-     S->size = n;
+     S->size = 0;
 
     /**
      * Using this function we don't restrict ourselves
@@ -48,22 +79,19 @@ void buildSet(Set *S, size_t n, ...) {
     /**
      * Allocates memory for our set.
      */
-    S->elems = malloc(sizeof(int)*n);
-
-    /**
-      * 1) Pass the first element to set.
-      * 2) Update sum counter.
-      */
-    S->elems[0] = va_arg(setElems, int);
-    S->sum += S->elems[0];
+    S->elems = malloc(0);
 
     /**
      * Pass each set element, to our set
      * and update the sum counter.
      */
-    for (size_t i = 1; i < n; ++i) {
-        S->elems[i] = va_arg(setElems, int);
-        S->sum += S->elems[i];
+    int elem;
+    for (size_t i = 0; i < n; ++i) {
+        elem = va_arg(setElems, int);
+        if (!isElementOfSet(S, elem)) {
+            lastSort_ascending(S, elem);
+            S->sum += elem;
+        }
     }
 
 
@@ -136,99 +164,25 @@ void createSetWithCapacity(Set *S, size_t n) {
 }
 
 int addElementInSet(Set *S, int x) {
-    for (size_t i = 0; i < S->size; ++i) {
-        if (S->elems[i] == x) { /* Element already exist. */
-            return 1;
-        }
+    /**
+     * Element already exist in our set.
+     */
+    if (isElementOfSet(S, x)) {
+        return 1;
     }
 
-    if (S->maxSize == -1) { /* We haven't set a maximum set size. */
-        /**
-         * Search the array-set for the position of the 
-         * last element that was smallest than x.
-         * That way we can know in which place we insert x.
-         */
-        long xIndex = 0;
-        for (size_t i = 0; i < S->size; ++i) {
-            if (S->elems[i] > x) {
-                break;
-            }
-            xIndex = (long)i;
-        }
-
-       /**
-         * 1) Update the size of set with one more element.
-         * 2) Reallocates memory for the new size.
-         */
-        ++(S->size);
-        S->elems = realloc(S->elems, sizeof(int)*(S->size));
-
-        /**
-         * Shift all elements found after the position xIndex
-         * one place to right. If there is no element then
-         * we just skip the operation.
-         */
-        for (long i = S->size-2; i > xIndex; --i) {
-            S->elems[i+1] = S->elems[i];
-        }
-
-        /**
-         * If the newly added element x is the first one,
-         * take the place of the current xIndex.
-         * Else add x one cell to right to avoid 
-         * overriding the element in xIndex.
-         */
-        if (S->size == 1) {
-            S->elems[xIndex] = x;
-        } else {
-            S->elems[xIndex+1] = x;
-        }        
-    } else { /* We set a maximum set size.*/
-        if (S->size < S->maxSize) { /* If there is space to add one more element.*/
-            /**
-             * Search the array-set for the position of the 
-             * last element that was smallest than x.
-             * That way we can now in which place we insert x.
-             */
-            long xIndex = 0;
-            for (size_t i = 0; i < S->size; ++i) {
-                if (S->elems[i] > x) {
-                    break;
-                }
-                xIndex = (long)i;
-            }
-
-           /**
-             * 1) Update the size of set with one more element.
-             * 2) Reallocates memory for the new size.
-             */
-            ++(S->size);
-            S->elems = realloc(S->elems, sizeof(int)*(S->size));
-
-            /**
-             * Shift all elements found after the position xIndex
-             * one place to right. If there is no element then
-             * we just skip the operation.
-             */
-            for (long i = S->size-2; i > xIndex; --i) {
-                S->elems[i+1] = S->elems[i];
-            }
-
-            /**
-             * If the newly added element x is the first one,
-             * take the place of the current xIndex.
-             * Else add x one cell to right to avoid 
-             * overriding the element in xIndex.
-             */
-            if (S->size == 1) {
-                S->elems[xIndex] = x;
-            } else {
-                S->elems[xIndex+1] = x;
-            }        
-        } else { 
-            return -1; /* Set is full. */
-        }
+    /**
+     * We haven set a maximum set max size and we
+     * don't have capacity for new element x.
+     */
+    if (S->maxSize != -1 && S->size >= S->maxSize) {
+        return -1;
     }
+
+    /**
+     * Insert element in set and position it.
+     */
+    lastSort_ascending(S, x);
 
     /**
      * We update the sum counter. This will
