@@ -16,11 +16,11 @@ In sets **NO duplicates** are allowed.
 
 **sizeOfSet(S)**: returns the number of elements in **S**.
 
-**intersectionSet(S, T)**: returns new set with elements found on set **S**, that also belong on set **T**, but no other elements. For instance, the intersection of sets  *S = { 2, 3, 4, 5 }*  and *T = { 1, 3, 6, 7, 8 }* is *U = { 3 }*.
+**intersectionSet(S, T, U)**: returns new set **U** with elements found on set **S**, that also belong on set **T**, but no other elements. For instance, the intersection of sets  *S = { 2, 3, 4, 5 }*  and *T = { 1, 3, 6, 7, 8 }* is *U = { 3 }*.
 
-**unionSet(S, T)**: returns new set **U** which contains all elements found both on set **S** and set **T**. As in sets no duplicates are allowed, **U** keeps only the first occurrence of each element. For instance, the union of sets *S = { 2, 3, 4, 5 }* and *T = { 1, 3, 6, 7, 8 }* is *U = { 1, 2, 3, 4, 5, 6, 7, 8 }*.
+**unionSet(S, T, U)**: returns new set **U** which contains all elements found both on set **S** and set **T**. As in sets no duplicates are allowed, **U** keeps only the first occurrence of each element. For instance, the union of sets *S = { 2, 3, 4, 5 }* and *T = { 1, 3, 6, 7, 8 }* is *U = { 1, 2, 3, 4, 5, 6, 7, 8 }*.
 
-**differenceSet(S, T)**: returns new set which contains elements found on set **S**, but not on set **T**. For instance, the difference of sets *S = { 2, 3, 4, 5 }* and *T = { 1, 3, 6, 7, 8 }* denoted as *(S - T)* is *U = { 2, 4, 5 }*.
+**differenceSet(S, T, U)**: returns new set **U** which contains elements found on set **S**, but not on set **T**. For instance, the difference of sets *S = { 2, 3, 4, 5 }* and *T = { 1, 3, 6, 7, 8 }* denoted as *(S - T)* is *U = { 2, 4, 5 }*.
 
 **subSet(S, T)**: check if all elements in set **S** are also elements of set **T** and returns a truth value (either `true` or `false`). For instance, the set *S = { 1, 2 }* is subset of *T = { 1, 2, 3 }*.
 
