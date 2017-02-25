@@ -7,7 +7,7 @@
  * Return 0 if f = s.
  * Return -1 if f < s.
  */
-static int comparator_ascending(const void * elem1, const void * elem2) {
+static int comparator_ascending(const void *elem1, const void *elem2) {
     int f = *((int*)elem1);
     int s = *((int*)elem2);
     return (f > s) - (f < s);
@@ -330,4 +330,28 @@ int minSet(Set *S) {
 
 int maxSet(Set *S) {
     return *(S->max);
+}
+
+int equalSets(Set *S1, Set *S2) {
+    /**
+     * First check if two sets have the
+     * same number of elements.
+     */
+    if (S1->size != S2->size) {
+        return 0;
+    }
+
+    /**
+     * Then check if the two sets contains the same
+     * elements. We only have to use one iteration
+     * because we keep the set-array sorted, that 
+     * means the neighbor values should be equal.
+     */
+    for (size_t i = 0; i < S1->size; ++i) {
+        if (S1->elems[i] != S2->elems[i]) {
+            return 0;
+        }
+    }
+
+    return 1;
 }

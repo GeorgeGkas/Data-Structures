@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdbool.h>
+#include <assert.h>
 
 
 typedef struct {
@@ -78,3 +79,9 @@ int minSet(Set *S);
  * Returns the maximum element of S.
  */
 int maxSet(Set *S);
+
+/**
+ * checks if sets S1 and S2 contain all 
+ * and only the same elements. 
+ */
+int equalSets(Set *S1, Set *S2);

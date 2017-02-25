@@ -118,7 +118,7 @@ int main(void) {
      * Build a set that contains all the capital letters of
      * the English alphabet.
      */
-    buildSet(&S, 26, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', \
+    buildSet(&S, 26, 'B', 'A', 'C', 'D', 'E', 'F', 'G', 'H', \
                      'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', \
                      'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', \
                      'Y', 'Z');
@@ -147,12 +147,6 @@ int main(void) {
         exit(-1);
     }
 
-    setMin = minSet(&S);
-    printf("%d\n", setMin);
-
-    setMax = maxSet(&S);
-    printf("%d\n", setMax);
-
     /**
      * Print our set.
      */
@@ -172,13 +166,6 @@ int main(void) {
      * The above procedure could be done like the following example.
      */
     buildSet(&S, 0);
-
-    setMin = minSet(&S);
-    printf("%d\n", setMin);
-
-    setMax = maxSet(&S);
-    printf("%d\n", setMax);
-    
     for (int i = 65; i < 65+26; ++i) {
         res = addElementInSet(&S, i);
         if (res != 0) {
@@ -198,6 +185,24 @@ int main(void) {
     printf("%ld\n", setSum);
 
     clearSet(&S);
+
+    /**
+     * Check sets equality.
+     */
+    buildSet(&S, 5, 5, 20, 2, 3, -8);
+
+    Set S1;
+    buildSet(&S1, 5, 20, 5, -8, 3, 2);
+
+    printf("%d\n", equalSets(&S, &S1));
+
+    addElementInSet(&S1, 900);
+
+    printf("%d\n", equalSets(&S, &S1));
+
+    removeElementFromSet(&S1, 900);
+
+    printf("%d\n", equalSets(&S, &S1));
 
     return 0;
 }
