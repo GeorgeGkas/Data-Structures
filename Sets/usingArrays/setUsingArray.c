@@ -1,5 +1,18 @@
 #include "setsUsingArray.h"
 
+/**
+ * Used as comparator function of qsort to
+ * sort the elements in ascending order.
+ * Return 1 if f > s.
+ * Return 0 if f = s.
+ * Return -1 if f < s.
+ */
+static int comparator_ascending(const void * elem1, const void * elem2) {
+    int f = *((int*)elem1);
+    int s = *((int*)elem2);
+    return (f > s) - (f < s);
+}
+
 void buildSet(Set *S, int n, ...) {
     /**
      * Pass each argument, representing a set element,
@@ -40,30 +53,33 @@ void buildSet(Set *S, int n, ...) {
     /**
       * 1) Pass the first element to set.
       * 2) Update sum counter.
-      * 3) Set the first set element to be both minimum and maximum 
-      * element in set.
       */
     S->elems[0] = va_arg(setElems, int);
     S->sum += S->elems[0];
-    S->min = S->max = &(S->elems[0]);
 
     /**
      * Pass each set element, to our set
      * and update the sum counter.
-     * Also update min and max elements.
      */
     for (int i = 1; i < n; ++i) {
         S->elems[i] = va_arg(setElems, int);
         S->sum += S->elems[i];
-
-        if (S->elems[i] < *(S->min)) {
-            S->min = &(S->elems[i]);
-        }
-
-        if (S->elems[i] > *(S->max)) {
-            S->max = &(S->elems[i]);
-        }
     }
+
+
+    /**
+     * We sort our set in ascending order. 
+     * This will allow us to get better big-O complexity
+     * in read functions. 
+     */
+    qsort (S->elems, S->size, sizeof(int), comparator_ascending);
+
+    /**
+     * Now the min element is the first one in our set implementation
+     * with arrays and max element is the last one.
+     */
+     S->min = &(S->elems[0]);
+     S->max = &(S->elems[(S->size)-1]);
 
     /**
      * Frees the variadic list.
@@ -127,26 +143,90 @@ int addElementInSet(Set *S, int x) {
     }
 
     if (S->maxSize == -1) { /* We haven't set a maximum set size. */
+        /**
+         * Search the array-set for the position of the 
+         * last element that was smallest than x.
+         * That way we can know in which place we insert x.
+         */
+        int xIndex = 0;
+        for (int i = 0; i < S->size; ++i) {
+            if (S->elems[i] > x) {
+                break;
+            }
+            xIndex = i;
+        }
+
        /**
          * 1) Update the size of set with one more element.
          * 2) Reallocates memory for the new size.
-         * 3) Add the new element.
          */
         ++(S->size);
         S->elems = realloc(S->elems, sizeof(int)*(S->size));
-        S->elems[(S->size)-1] = x;
+
+        /**
+         * Shift all elements found after the position xIndex
+         * one place to right. If there is no element then
+         * we just skip the operation.
+         */
+        for (int i = S->size-2; i > xIndex; --i) {
+            S->elems[i+1] = S->elems[i];
+        }
+
+        /**
+         * If the newly added element x is the first one,
+         * take the place of the current xIndex.
+         * Else add x one cell to right to avoid 
+         * overriding the element in xIndex.
+         */
+        if (S->size == 1) {
+            S->elems[xIndex] = x;
+        } else {
+            S->elems[xIndex+1] = x;
+        }        
     } else { /* We set a maximum set size.*/
         if (S->size < S->maxSize) { /* If there is space to add one more element.*/
             /**
+             * Search the array-set for the position of the 
+             * last element that was smallest than x.
+             * That way we can now in which place we insert x.
+             */
+            int xIndex = 0;
+            for (int i = 0; i < S->size; ++i) {
+                if (S->elems[i] > x) {
+                    break;
+                }
+                xIndex = i;
+            }
+
+           /**
              * 1) Update the size of set with one more element.
              * 2) Reallocates memory for the new size.
-             * 3) Add the new element.
              */
             ++(S->size);
             S->elems = realloc(S->elems, sizeof(int)*(S->size));
-            S->elems[(S->size)-1] = x;
-        } else {
-            return -1;
+
+            /**
+             * Shift all elements found after the position xIndex
+             * one place to right. If there is no element then
+             * we just skip the operation.
+             */
+            for (int i = S->size-2; i > xIndex; --i) {
+                S->elems[i+1] = S->elems[i];
+            }
+
+            /**
+             * If the newly added element x is the first one,
+             * take the place of the current xIndex.
+             * Else add x one cell to right to avoid 
+             * overriding the element in xIndex.
+             */
+            if (S->size == 1) {
+                S->elems[xIndex] = x;
+            } else {
+                S->elems[xIndex+1] = x;
+            }        
+        } else { 
+            return -1; /* Set is full. */
         }
     }
 
@@ -158,21 +238,12 @@ int addElementInSet(Set *S, int x) {
      S->sum += x;
 
     /**
-     * If x is the first element in set,
-     * use it as min and max, else check x 
-     * with the current min and max.
+     * Update the values of min and max
+     * with the first and last element in set-array. 
+     * This is possible by the time we keep our set-array sorted.
      */
-    if (S->min == NULL) {
-        S->min = S->max = &(S->elems[(S->size)-1]);
-    } else {
-        if (x < *(S->min)) {
-            S->min = &(S->elems[(S->size)-1]);
-        }
-
-        if (x > *(S->max)) {
-            S->max = &(S->elems[(S->size)-1]);
-        }
-    }
+    S->min = &(S->elems[0]);
+    S->max = &(S->elems[(S->size)-1]);
 
     return 0;
 }
@@ -211,7 +282,7 @@ int removeElementFromSet(Set *S, int x) {
     }
 
     /**
-     * 1) Update the size of set with one more element.
+     * 1) Update the size of set with one less element.
      * 2) Move all elements after x one position back, as
      *    the cell of x is not needed now.
      * 3) Reallocate new size. This will delete the last 
@@ -232,24 +303,13 @@ int removeElementFromSet(Set *S, int x) {
      */
      S->sum -= x;
 
-     /**
-      * Check if the removed element is the current
-      * min or max one. If it is, then check the set
-      * to find the new min or max value.
-      */
-    if (x == *(S->min)) {
-        for (int i = 0; i < S->size; ++i) {
-            if (S->elems[i] < *(S->min)) {
-                S->min = &(S->elems[i]);
-            }
-        }
-     } else if (x == *(S->max)) {
-        for (int i = 0; i < S->size; ++i) {
-            if (S->elems[i] > *(S->max)) {
-                S->max = &(S->elems[i]);
-            }
-        }
-     }
+    /**
+     * Update the values of min and max
+     * with the first and last element in set-array. 
+     * This is possible by the time we keep our set-array sorted.
+     */
+    S->min = &(S->elems[0]);
+    S->max = &(S->elems[(S->size)-1]);
  
     return 0;
 }

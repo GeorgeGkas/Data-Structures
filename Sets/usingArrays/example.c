@@ -147,6 +147,12 @@ int main(void) {
         exit(-1);
     }
 
+    setMin = minSet(&S);
+    printf("%d\n", setMin);
+
+    setMax = maxSet(&S);
+    printf("%d\n", setMax);
+
     /**
      * Print our set.
      */
@@ -166,6 +172,13 @@ int main(void) {
      * The above procedure could be done like the following example.
      */
     buildSet(&S, 0);
+
+    setMin = minSet(&S);
+    printf("%d\n", setMin);
+
+    setMax = maxSet(&S);
+    printf("%d\n", setMax);
+    
     for (int i = 65; i < 65+26; ++i) {
         res = addElementInSet(&S, i);
         if (res != 0) {
