@@ -189,10 +189,11 @@ int main(void) {
     /**
      * Check sets equality.
      */
-    buildSet(&S, 5, 5, 20, 2, 3, -8);
+    buildSet(&S, 6, 5, 20, 2, 3, -8, -8);
 
     Set S1;
     buildSet(&S1, 5, 20, 5, -8, 3, 2);
+
 
     printf("%d\n", equalSets(&S, &S1));
 
@@ -206,6 +207,16 @@ int main(void) {
 
     printf("%d\n", isElementOfSet(&S, 2));
     printf("%d\n", isElementOfSet(&S, 3));
+
+    Set S2;
+    buildSet(&S2, 3, 20, 5, 2);
+
+    printf("%d %d\n", subSet(&S2, &S), minSet(&S2));
+
+    clearSet(&S1);
+    clearSet(&S2);
+
+    printf("%d\n", subSet(&S2, &S1));
 
     return 0;
 }

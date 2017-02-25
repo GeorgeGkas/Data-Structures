@@ -332,12 +332,12 @@ int maxSet(Set *S) {
     return *(S->max);
 }
 
-int equalSets(Set *S1, Set *S2) {
+int equalSets(Set *S, Set *T) {
     /**
      * First check if two sets have the
      * same number of elements.
      */
-    if (S1->size != S2->size) {
+    if (S->size != T->size) {
         return 0;
     }
 
@@ -347,8 +347,8 @@ int equalSets(Set *S1, Set *S2) {
      * because we keep the set-array sorted, that 
      * means the neighbor values should be equal.
      */
-    for (size_t i = 0; i < S1->size; ++i) {
-        if (S1->elems[i] != S2->elems[i]) {
+    for (size_t i = 0; i < S->size; ++i) {
+        if (S->elems[i] != T->elems[i]) {
             return 0;
         }
     }
@@ -376,4 +376,32 @@ int isElementOfSet(Set *S, int x) {
     }
 
     return 0;
+}
+
+int subSet(Set *S, Set *T) {
+    /**
+     * S has more elements than T.
+     */
+    if (S->size > T->size) {
+        return 0;
+    }
+
+    /**
+     * Check each element in S if it's present in T.
+     * By the time we have sorted our set-array we 
+     * know that if Si goes greater than Tj the element
+     * is not exist, so we can terminate the procedure.
+     */
+    size_t i = 0, j = 0;
+    while (i < S->size && j < T->size) {
+        if (S->elems[i] == T->elems[j]) {
+            ++i; /* Found Si on Tj. Proceed to next element in S. */
+        } else if (S->elems[i] < T->elems[j]) {
+            return 0; /* Element Si has not been found on Tj. */
+        } else {
+            ++j; /* Check the next element in T if match Si. */
+        }
+    }
+
+    return 1;
 }

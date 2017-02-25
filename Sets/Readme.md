@@ -28,7 +28,7 @@ In sets **NO duplicates** are allowed.
 
 **isEmptySet(S)**: checks whether the set **S** contains no elements and returns either 0 (false) or 1 (true);
 
-**equalSets(S1, S2)**: checks if sets **S1** and **S2** contain all and only the same elements. 
+**equalSets(S, T)**: checks if sets **S** and **T** contain all and only the same elements. 
 
 **createSetWithCapacity(S, n)**: creates a new, initially empty, set structure capable of holding up to **n** elements. This function should be called on empty set, else there will be undefined behaviors. To use this function on set that already has been initialized with previous `createSetWithCapacity()` or `buildSet()` call, you have first to call `clearSet()`.
 
