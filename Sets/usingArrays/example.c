@@ -225,5 +225,38 @@ int main(void) {
 
     printf("%d\n", subSet(&S2, &S1));
 
+    Set U;
+    buildSet(&U, 0);
+
+    buildSet(&S2, 4, 'A', 'B', 'C', 'D');
+    buildSet(&S1, 5, 'A', 'C', 'E', 'F', 'I');
+
+    intersectionSet(&S2, &S1, &U);
+
+    for (int i = 0; i < U.size; ++i) {
+        printf("%c ", U.elems[i]);
+    }
+    printf("\n");
+
+    clearSet(&U);
+    buildSet(&U, 0);
+
+    unionSet(&S2, &S1, &U);
+
+    for (int i = 0; i < U.size; ++i) {
+        printf("%c ", U.elems[i]);
+    }
+    printf("\n");
+
+    clearSet(&U);
+    buildSet(&U, 0);
+
+    differenceSet(&S1, &S2, &U);
+
+    for (int i = 0; i < U.size; ++i) {
+        printf("%c ", U.elems[i]);
+    }
+    printf("\n");
+
     return 0;
 }

@@ -81,7 +81,7 @@ int minSet(Set *S);
 int maxSet(Set *S);
 
 /**
- * checks if sets S1 and S2 contain all 
+ * Checks if sets S1 and S2 contain all 
  * and only the same elements. 
  */
 int equalSets(Set *S, Set *T);
@@ -92,7 +92,27 @@ int equalSets(Set *S, Set *T);
 int isElementOfSet(Set *S, int x);
 
 /**
- * check if all elements in set S 
+ * Check if all elements in set S 
  * are also elements of set T.
  */
 int subSet(Set *S, Set *T);
+
+/**
+ * Returns new set U with elements found on set S, 
+ * that also belong on set T, but no other elements.
+ */
+void intersectionSet(Set *S, Set *T, Set *U);
+
+/**
+ * Returns new set U which contains all elements 
+ * found both on set S and set T. 
+ * As in sets no duplicates are allowed, 
+ * U keeps only the first occurrence of each element.
+ */
+void unionSet(Set *S, Set *T, Set *U);
+
+/**
+ * Returns new set U which contains elements found 
+ * on set S, but not on set T.
+ */
+void differenceSet(Set *S, Set *T, Set *U);
