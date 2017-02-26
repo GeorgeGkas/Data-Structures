@@ -51,7 +51,7 @@ void buildSet(Set *S, size_t n, ...) {
      */
     S->maxSize = -1;
 
-     /**
+    /**
      * We initialize the sum counter. This will
      * allow us to get the sum using sumOfSet()
      * in O(1) time.

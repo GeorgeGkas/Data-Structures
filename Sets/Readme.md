@@ -8,9 +8,9 @@ In sets **NO duplicates** are allowed.
 
 **buildSet(S, n, x1, x2, x3, ...)**: creates a set structure **S** with **n** elements x1,x2, x3,…. This function should be called on empty set, else there will be undefined behaviors. To use this function on set that already has been initialized with previous `createSetWithCapacity()` or `buildSet()` call, you have first to call `clearSet()`.
 
-**addElementInSet(S, x)**: adds the element **x** to **S**, if it is not present already.
+**addElementInSet(S, x)**: adds the element **x** to **S**, if it is not present already. If **x** already exist, returns `1`. If we don't have any more space to add the element, returns `-1`. In success returns `0`.
 
-**removeElementFromSet(S, x)**: removes the element **x** from **S**, if it is present.
+**removeElementFromSet(S, x)**: removes the element **x** from **S**, if it is present. If **x** could not be found in **S**, returns `1`. In success returns `0`.
 
 **capacityOfSet(S)**: returns the maximum number of elements that **S** can hold. If max capacity has not been set (eg you initialized the set using `buildSet()`) then returns `-1`.
 
@@ -24,9 +24,9 @@ In sets **NO duplicates** are allowed.
 
 **subSet(S, T)**: check if all elements in set **S** are also elements of set **T** and returns a truth value (either `true` or `false`). For instance, the set *S = { 1, 2 }* is subset of *T = { 1, 2, 3 }*.
 
-**isElementOfSet(S, t)**: checks whether the value **x** is in the set **S** and returns a truth value (either `true` or `false`).
+**isElementOfSet(S, t)**: checks whether the value **x** is in the set **S** and returns either `0` (does not exist) or `1` (exist).
 
-**isEmptySet(S)**: checks whether the set **S** contains no elements and returns either 0 (false) or 1 (true);
+**isEmptySet(S)**: checks whether the set **S** contains no elements and returns either `0` (not empty) or `1` (empty).
 
 **equalSets(S, T)**: checks if sets **S** and **T** contain all and only the same elements. 
 
@@ -36,18 +36,16 @@ In sets **NO duplicates** are allowed.
 
 **sumOfSet(S)**: returns the sum of all elements of **S**.
 
-**minSet(S)**: returns the minimum element of **S**.
+**minSet(S)**: returns the minimum element of **S**. This function should be called on **non empty** set, else there will be undefined behaviors. You can check if **S** is empty with `isEmptySet()` function.
 
-**maxSet(S)**: returns the maximum element of **S**.
-
-**nearestInSet(S, x)**: returns the element of **S** that is closest in value to **x**. 
+**maxSet(S)**: returns the maximum element of **S**. This function should be called on **non empty** set, else there will be undefined behaviors. You can check if **S** is empty with `isEmptySet()` function.
 
 **reduceSet(S, f, x)** and **f(index, x)**: iterates through every element in set **S** passing each element found in function **f**. In **f** we need two parameters. The first one **index** is the element from the set **S**. **x** is used as return value (for example you do some manipulations and want to return the final value back to caller function). `reduceSet()` should be called only in initialized sets.
 
 
 ### Implementing Set in C
 
-C has not a build in set data structure in it's core library. However, there are a number of ways, some more appropriate than others, to implement sets in C. Bellow, we list some implementation ideas, together with a time complexity table in big-O for each one. We start with the simplest approach, and we'll move to more sophisticated implementations later.
+C has not a build in set data structure in it's core library. However, there are a number of ways, some more appropriate than others, to implement sets in C. We start with the simplest approach, and we'll move to more sophisticated implementations later.
 
 #### Using Arrays
 
