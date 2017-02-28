@@ -356,15 +356,13 @@ void mapSet(Set *S, int (*f)(int), Set *T) {
     int mappedElem;
     for (size_t i = 0; i < S->size; ++i) {
         mappedElem = f(S->elems[i]);
-        if (findInSet(T, mappedElem) == SET_ELEMENT_NOT_FOUND) {
-            addElementInSet(T, mappedElem);
-        }
+        addElementInSet(T, mappedElem);
     }
 }
 
 void filterSet(Set *S, int (*f)(int), Set *T) {
     for (size_t i = 0; i < S->size; ++i) {
-        if (f(S->elems[i]) && findInSet(T, S->elems[i]) == SET_ELEMENT_NOT_FOUND) {
+        if (f(S->elems[i])) {
             addElementInSet(T, S->elems[i]);
         }
     }
