@@ -4,6 +4,10 @@ void reduceCallback(int index, void *x) {
     printf("%c\n", index);
 }
 
+int mapCallback(int index) {
+    return index + 1;
+}
+
 int main(void) {
     /**
      * Bellow we define our set.
@@ -257,6 +261,11 @@ int main(void) {
         printf("%c ", U.elems[i]);
     }
     printf("\n");
+
+    Set T;
+    buildSet(&T, 0);
+    mapSet(&S2, mapCallback, &T);
+    reduceSet(&T, reduceCallback, NULL);
 
     return 0;
 }

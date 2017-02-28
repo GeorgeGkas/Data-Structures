@@ -351,3 +351,13 @@ void differenceSet(Set *S, Set *T, Set *U) {
         ++i;
     }
 }
+
+void mapSet(Set *S, int (*f)(int), Set *T) {
+    int mappedElem;
+    for (size_t i = 0; i < S->size; ++i) {
+        mappedElem = f(S->elems[i]);
+        if (findInSet(T, mappedElem) == SET_ELEMENT_NOT_FOUND) {
+            addElementInSet(T, mappedElem);
+        }
+    }
+}

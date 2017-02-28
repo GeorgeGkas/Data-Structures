@@ -44,7 +44,7 @@ In sets **NO duplicates** are allowed.
 
 **createSetFrom(S, T)**: creates a new set structure **S** containing all the elements of the given set **T**.
 
-**mapSet(S, f, T)**: returns the set **T** of distinct values resulting from applying function **f** to each element of **S**.
+**mapSet(S, f, T)** and **f(index)**: returns the set **T** of distinct values resulting from applying function **f** to each element of **S**. In **f**, **index** is the current element from **S**. We note that the set **T** must have the same max capacity like **S**, or be initialized without max capacity with `buildSet()`. In other case, if capacity of **T** is lower than **S**, some elements will not be copied to **T**.
 
 **filterSet(S, f, T)**: returns the set **T** containing all elements of **S** that satisfy a given function [predicate](https://en.wikipedia.org/wiki/Predicate_(mathematical_logic)) **f**.
 

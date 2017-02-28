@@ -117,3 +117,9 @@ void unionSet(Set *S, Set *T, Set *U);
  * on set S, but not on set T.
  */
 void differenceSet(Set *S, Set *T, Set *U);
+
+/**
+ * Returns the set T of distinct values resulting 
+ * from applying function f to each element of S.
+ */
+ void mapSet(Set *S, int (*f)(int), Set *T);
