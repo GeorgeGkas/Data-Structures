@@ -369,3 +369,9 @@ void filterSet(Set *S, int (*f)(int), Set *T) {
         }
     }
 }
+
+void copyToSet(Set *S, Set *T) {
+    for (size_t i = 0; i < T->size; ++i) {
+        addElementInSet(S, T->elems[i]);
+    }
+}

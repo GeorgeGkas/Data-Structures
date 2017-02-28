@@ -276,5 +276,12 @@ int main(void) {
     filterSet(&S2, filterCallback, &T);
     reduceSet(&T, reduceCallback, NULL);
 
+    printf("\n");
+    Set W;
+    createSetWithCapacity(&W, 3);
+    copyToSet(&W, &S1);
+    copyToSet(&W, &S2);
+    reduceSet(&W, reduceCallback, NULL);
+
     return 0;
 }

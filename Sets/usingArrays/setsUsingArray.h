@@ -130,3 +130,9 @@ void mapSet(Set *S, int (*f)(int), Set *T);
  * from applying function f to each element of S.
  */
 void filterSet(Set *S, int (*f)(int), Set *T);
+
+/**
+ * Copy to set structure S all the elements 
+ * of the given set T.
+ */
+void copyToSet(Set *S, Set *T);
