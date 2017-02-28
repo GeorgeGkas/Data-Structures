@@ -39,7 +39,8 @@ void createSetWithCapacity(Set *S, size_t n);
 int addElementInSet(Set *S, int x);
 
 /**
- * Iterate every element in S and pass it to function S.
+ * Iterates through every element in set S passing each 
+ * element found in function f.
  * x is used in case we want to return a result from f
  * back to our caller function.
  */
@@ -122,4 +123,10 @@ void differenceSet(Set *S, Set *T, Set *U);
  * Returns the set T of distinct values resulting 
  * from applying function f to each element of S.
  */
- void mapSet(Set *S, int (*f)(int), Set *T);
+void mapSet(Set *S, int (*f)(int), Set *T);
+
+/**
+ * Returns the set T of distinct values resulting 
+ * from applying function f to each element of S.
+ */
+void filterSet(Set *S, int (*f)(int), Set *T);

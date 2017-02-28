@@ -8,6 +8,10 @@ int mapCallback(int index) {
     return index + 1;
 }
 
+int filterCallback(int index) {
+    return index == 'A' || index == 'B';
+}
+
 int main(void) {
     /**
      * Bellow we define our set.
@@ -265,6 +269,11 @@ int main(void) {
     Set T;
     buildSet(&T, 0);
     mapSet(&S2, mapCallback, &T);
+    reduceSet(&T, reduceCallback, NULL);
+
+    printf("\n");
+    clearSet(&T);
+    filterSet(&S2, filterCallback, &T);
     reduceSet(&T, reduceCallback, NULL);
 
     return 0;
