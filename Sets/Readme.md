@@ -42,6 +42,12 @@ In sets **NO duplicates** are allowed.
 
 **reduceSet(S, f, x)** and **f(index, x)**: iterates through every element in set **S** passing each element found in function **f**. In **f** we need two parameters. The first one **index** is the element from the set **S**. **x** is used as return value (for example you do some manipulations and want to return the final value back to caller function). `reduceSet()` should be called only in initialized sets.
 
+**createSetFrom(S, T)**: creates a new set structure **S** containing all the elements of the given set **T**.
+
+**mapSet(S, f, T)**: returns the set **T** of distinct values resulting from applying function **f** to each element of **S**.
+
+**filterSet(S, f, T)**: returns the set **T** containing all elements of **S** that satisfy a given function [predicate](https://en.wikipedia.org/wiki/Predicate_(mathematical_logic)) **f**.
+
 
 ### Implementing Set in C
 

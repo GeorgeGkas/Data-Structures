@@ -16,13 +16,31 @@ static void swapSetElements(int *E1, int *E2) {
     (*E2) = tmp;
 }
 
+static int findInSet(Set *S, int x) {
+    int middle, left = 0, right = (S->size) - 1;
+    while (left <= right) {
+        middle = (left + right) / 2;
+        if (S->elems[middle] == x) {
+            return middle;
+        } else {
+            if (S->elems[middle] > x) {
+                right = middle - 1;
+            } else {
+                left = middle + 1;
+            }
+        }
+    }
+
+    return SET_ELEMENT_NOT_FOUND;
+}
+
 /**
  * lastSort is a variation of insert sort algorithm.
  * We take the newly added element which is in the last
  * position of our array-set and we move it to the left
  * until we find it's position.
  */
-static void lastSort_ascending(Set *S, int x) {
+static void addElementInOrder(Set *S, int x) {
     /**
      * 1) Update the size of set with one more element.
      * 2) Reallocates memory for the new size.
@@ -30,16 +48,16 @@ static void lastSort_ascending(Set *S, int x) {
      * 4) Position the x in the correct place.
      */
     ++(S->size);
-    S->elems = realloc(S->elems, sizeof(int)*(S->size));
-    S->elems[(S->size)-1] = x;
+    S->elems = realloc(S->elems, sizeof(int) * (S->size));
+    S->elems[(S->size) - 1] = x;
 
-    for (size_t i = (S->size)-1; i > 0 && S->elems[i] < S->elems[i-1]; --i ) {
-        swapSetElements(&(S->elems[i]), &(S->elems[i-1]));
+    for (size_t i = (S->size) - 1; i > 0 && S->elems[i] < S->elems[i - 1]; --i ) {
+        swapSetElements(&(S->elems[i]), &(S->elems[i - 1]));
     }
 }
 
 void buildSet(Set *S, size_t n, ...) {
-    va_list setElems; 
+    va_list setElems;
     va_start(setElems, n);
 
     S->size = 0;
@@ -51,34 +69,23 @@ void buildSet(Set *S, size_t n, ...) {
      */
     S->maxSize = -1;
 
-    /**
-     * We initialize the sum counter. This will
-     * allow us to get the sum using sumOfSet()
-     * in O(1) time.
-     */
     S->sum = 0;
 
     S->elems = malloc(0);
 
-    /**
-     * Pass each set element, to our set
-     * and update the sum counter, only 
-     * if there is not exist already.
-     */
     int elem;
     for (size_t i = 0; i < n; ++i) {
         elem = va_arg(setElems, int);
-        if (!isElementOfSet(S, elem)) {
-            lastSort_ascending(S, elem);
+        if (findInSet(S, elem) == SET_ELEMENT_NOT_FOUND) {
+            addElementInOrder(S, elem);
             S->sum += elem;
         }
     }
 
-
     /**
-     * We sort our set in ascending order. 
+     * We sort our set in ascending order.
      * This will allow us to get better big-O complexity
-     * in read functions. 
+     * in read functions.
      */
     qsort(S->elems, S->size, sizeof(int), comparator_ascending);
 
@@ -87,7 +94,7 @@ void buildSet(Set *S, size_t n, ...) {
      * with arrays and max element is the last one.
      */
     S->min = &(S->elems[0]);
-    S->max = &(S->elems[(S->size)-1]);
+    S->max = &(S->elems[(S->size) - 1]);
 
     va_end(setElems);
 }
@@ -112,26 +119,18 @@ void createSetWithCapacity(Set *S, size_t n) {
 
     S->size = 0;
 
-    /**
-     * We initialize the sum counter. This will
-     * allow us to get the sum using sumOfSet()
-     * in O(1) time.
-     */
     S->sum = 0;
 
-     /**
-      * No elements means no min and max value.
-      */
     S->min = S->max = NULL;
 
-    S->elems = malloc(sizeof(int)*n);
+    S->elems = malloc(sizeof(int) * n);
 }
 
 int addElementInSet(Set *S, int x) {
     /**
      * We don't want to add duplicates values.
      */
-    if (isElementOfSet(S, x)) {
+    if (findInSet(S, x) != SET_ELEMENT_NOT_FOUND) {
         return 1;
     }
 
@@ -143,25 +142,12 @@ int addElementInSet(Set *S, int x) {
         return -1;
     }
 
-    /**
-     * Insert element in set and position it.
-     */
-    lastSort_ascending(S, x);
+    addElementInOrder(S, x);
 
-    /**
-     * We update the sum counter. This will
-     * allow us to get the sum using sumOfSet()
-     * in O(1) time.
-     */
     S->sum += x;
 
-    /**
-     * Update the values of min and max
-     * with the first and last element in set-array. 
-     * This is possible by the time we keep our set-array sorted.
-     */
     S->min = &(S->elems[0]);
-    S->max = &(S->elems[(S->size)-1]);
+    S->max = &(S->elems[(S->size) - 1]);
 
     return 0;
 }
@@ -185,17 +171,8 @@ long capacityOfSet(Set *S) {
 }
 
 int removeElementFromSet(Set *S, int x) {
-    size_t xIndex;
-    bool xExist = false; /* x exist in set? */
-    for (size_t i = 0; i < S->size; ++i) {
-        if (S->elems[i] == x) {
-            xIndex = i;
-            xExist = true;
-            break;
-        }
-    }
-
-    if (!xExist) { /* We could not found the x in S. Element does not exist. */
+    size_t xIndex = findInSet(S, x);
+    if (xIndex == SET_ELEMENT_NOT_FOUND) {
         return 1;
     }
 
@@ -203,28 +180,20 @@ int removeElementFromSet(Set *S, int x) {
      * 1) Update the size of set with one less element.
      * 2) Move all elements after x one position back, as
      *    the cell of x is not needed now.
-     * 3) Reallocate new size. This will delete the last 
+     * 3) Reallocate new size. This will delete the last
      *    array cell, which really don't need it, cause we moved
      *    all elements back to one position.
      */
     --(S->size);
     for (size_t i = xIndex; i < S->size; ++i) {
-        S->elems[i] = S->elems[i+1];
+        S->elems[i] = S->elems[i + 1];
     }
-    S->elems = realloc(S->elems, sizeof(int)*(S->size));
+    S->elems = realloc(S->elems, sizeof(int) * (S->size));
 
-
-    /**
-     * We update the sum counter. This will
-     * allow us to get the sum using sumOfSet()
-     * in O(1) time.
-     */
     S->sum -= x;
 
     /**
      * Update the values of min and max
-     * with the first and last element in set-array. 
-     * This is possible by the time we keep our set-array sorted.
      * If size is zero, the last element is set was just removed,
      * then there is no min and max.
      */
@@ -232,13 +201,19 @@ int removeElementFromSet(Set *S, int x) {
         S->min = S->max = NULL;
     } else {
         S->min = &(S->elems[0]);
-        S->max = &(S->elems[(S->size)-1]);
+        S->max = &(S->elems[(S->size) - 1]);
     }
- 
+
     return 0;
 }
 
 long sumOfSet(Set *S) {
+    /**
+     * We initialized the sum counter in buildSet()
+     * or createSetWithCapacity(). We updated it
+     * when we added or removed an element. This allowed us
+     * to get the sum using sumOfSet() in O(1) time.
+     */
     return S->sum;
 }
 
@@ -251,18 +226,14 @@ int maxSet(Set *S) {
 }
 
 int equalSets(Set *S, Set *T) {
-    /**
-     * First check if two sets have the
-     * same number of elements.
-     */
     if (S->size != T->size) {
         return 0;
     }
 
     /**
-     * Then check if the two sets contains the same
+     * Check if the two sets contains the same
      * elements. We only have to use one iteration
-     * because we keep the set-array sorted, that 
+     * because we keep the set-array sorted, that
      * means the neighbor values should be equal.
      */
     for (size_t i = 0; i < S->size; ++i) {
@@ -275,21 +246,11 @@ int equalSets(Set *S, Set *T) {
 }
 
 int isElementOfSet(Set *S, int x) {
-    int middle, left = 0, right = (S->size)-1;
-    while (left <= right) {
-        middle = (left + right)/2;
-        if (S->elems[middle] == x) {
-            return 1;
-        } else {
-            if (S->elems[middle] > x) {
-                right = middle - 1;
-            } else {
-                left = middle + 1;
-            }
-        }
+    if (findInSet(S, x) == SET_ELEMENT_NOT_FOUND) {
+        return 0;
+    } else {
+        return 1;
     }
-
-    return 0;
 }
 
 int subSet(Set *S, Set *T) {
@@ -299,7 +260,7 @@ int subSet(Set *S, Set *T) {
 
     /**
      * Check each element in S if it's present in T.
-     * By the time we have sorted our set-array we 
+     * By the time we have sorted our set-array we
      * know that if Si goes greater than Tj the element
      * is not exist, so we can terminate the procedure.
      */
@@ -321,7 +282,7 @@ void intersectionSet(Set *S, Set *T, Set *U) {
     size_t i = 0, j = 0;
     while (i < S->size && j < T->size) {
         if (S->elems[i] == T->elems[j]) {
-            lastSort_ascending(U, S->elems[i]);
+            addElementInOrder(U, S->elems[i]);
             ++i;
             ++j;
         } else {
@@ -330,7 +291,7 @@ void intersectionSet(Set *S, Set *T, Set *U) {
             } else {
                 ++j;
             }
-        }    
+        }
     }
 }
 
@@ -338,13 +299,13 @@ void unionSet(Set *S, Set *T, Set *U) {
     size_t i = 0, j = 0;
     while (i < S->size && j < T->size) {
         if (S->elems[i] < T->elems[j]) {
-            lastSort_ascending(U, S->elems[i]);
+            addElementInOrder(U, S->elems[i]);
             ++i;
         } else if (S->elems[i] > T->elems[j]) {
-            lastSort_ascending(U, T->elems[j]);
+            addElementInOrder(U, T->elems[j]);
             ++j;
         } else {
-            lastSort_ascending(U, T->elems[j]);
+            addElementInOrder(U, T->elems[j]);
             ++j;
             ++i;
         }
@@ -355,16 +316,16 @@ void unionSet(Set *S, Set *T, Set *U) {
      * insert the remaining ones to U.
      */
     while (i < S->size) {
-        lastSort_ascending(U, S->elems[i]);
+        addElementInOrder(U, S->elems[i]);
         ++i;
-    } 
+    }
 
     /**
      * T had more elements than S, so
      * insert the remaining ones to U.
      */
     while (j < T->size) {
-        lastSort_ascending(U, T->elems[j]);
+        addElementInOrder(U, T->elems[j]);
         ++j;
     }
 }
@@ -373,20 +334,20 @@ void differenceSet(Set *S, Set *T, Set *U) {
     size_t i = 0, j = 0;
     while (i < S->size && j < T->size) {
         if (S->elems[i] != T->elems[j]) {
-            if (!isElementOfSet(T, S->elems[i])) {
-                lastSort_ascending(U, S->elems[i]);
+            if (findInSet(T, S->elems[i]) == SET_ELEMENT_NOT_FOUND) {
+                addElementInOrder(U, S->elems[i]);
             }
         }
         ++i;
         ++j;
-    }   
+    }
 
     /**
      * S had more elements than T, so
      * insert the remaining ones to U.
      */
     while (i < S->size) {
-        lastSort_ascending(U, S->elems[i]);
+        addElementInOrder(U, S->elems[i]);
         ++i;
     }
 }

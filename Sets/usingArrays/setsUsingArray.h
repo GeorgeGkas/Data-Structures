@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <assert.h>
 
+#define SET_ELEMENT_NOT_FOUND -1
 
 typedef struct {
 	int *elems; /* Array contains our set elements. */
