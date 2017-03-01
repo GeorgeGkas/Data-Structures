@@ -9,7 +9,7 @@
 **stackEmpty(S)**: checks whether the stack **S** contains no elements and returns either `0` (not empty) or `1` (empty).
 **stackPeek(S)**: returns the last inserted element to stack **S** without removing it.
 
-### Implementing Set in C
+### Implementing Stacks in C
 
 C does not include stack data structure in it's core library. To create one stack we have two options. Using an dynamic array to hold it's elements or implement it using single linked list.
 
