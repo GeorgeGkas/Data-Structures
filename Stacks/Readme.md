@@ -4,10 +4,13 @@
  
 ### Basic operation on sets
 
-**stackPush(S, x)**: adds the element **x** to stack **S**.
-**stackPop(S)**: removes the element **x** from stack **S** and return it.
-**stackEmpty(S)**: checks whether the stack **S** contains no elements and returns either `0` (not empty) or `1` (empty).
-**stackPeek(S)**: returns the last inserted element to stack **S** without removing it.
+**createStack(S, n)**: create an empty stack **S** with max capacity **n**.
+**buildStack(S, n, x1, x2, ...)**: creates a stack **S** with **n** elements x1,x2, x3,…. This function should be called on empty stack, else there will be undefined behaviors.
+**pushStack(S, x)**: adds the element **x** to stack **S**.
+**popStack(S)**: removes the element **x** from stack **S** and return it.
+**isEmptyStack(S)**: checks whether the stack **S** contains no elements and returns either `0` (not empty) or `1` (empty).
+**peekStack(S)**: returns the last inserted element to stack **S** without removing it.
+**sizeOfStack(S)**: returns the number of elements in stack **S**.
 
 ### Implementing Stacks in C
 
@@ -15,8 +18,8 @@ C does not include stack data structure in it's core library. To create one stac
 
 ### Using Arrays (limited number of elements)
 
-When we use a stack implementation with arrays, we have a static capacity. This means that we should check for overflow each time we try to add a new element in stack.
+When we use a stack implementation with arrays, we have a static capacity. This means that we should check for overflow each time we try to add a new element in stack. Function `buildStack()` is not used here.
 
 ### Using Single Linked Lists (unlimited elements)
 
-When we implement stacks with single linked lists, we do not set a max capacity for our stack. This means that we do not have to check if our stack overflows.
+When we implement stacks with single linked lists, we do not set a max capacity for our stack. This means that we do not have to check if our stack overflows. Function `createStack()` is not used here.
