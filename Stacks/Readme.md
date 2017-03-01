@@ -5,11 +5,17 @@
 ### Basic operation on sets
 
 **createStack(S, n)**: create an empty stack **S** with max capacity **n**.
+
 **buildStack(S, n, x1, x2, ...)**: creates a stack **S** with **n** elements x1,x2, x3,…. This function should be called on empty stack, else there will be undefined behaviors.
+
 **pushStack(S, x)**: adds the element **x** to stack **S**.
+
 **popStack(S)**: removes the element **x** from stack **S** and return it.
+
 **isEmptyStack(S)**: checks whether the stack **S** contains no elements and returns either `0` (not empty) or `1` (empty).
+
 **peekStack(S)**: returns the last inserted element to stack **S** without removing it.
+
 **sizeOfStack(S)**: returns the number of elements in stack **S**.
 
 ### Implementing Stacks in C
