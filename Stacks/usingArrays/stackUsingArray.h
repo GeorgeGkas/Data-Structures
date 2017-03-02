@@ -3,10 +3,10 @@
 #include <stdarg.h>
 
 typedef struct {
-	int *elems;
-	int *top;
-	size_t size;
-	long maxCapacity;
+	int *elems; /* Store our stack elements using dynamic array. */
+	int *top; /* The top element of our stack. */
+	size_t size; /* The number of elements exist on our stack. */
+	long maxCapacity; /* The max capacity of our stack. (-1) If we don't set it. */
 } Stack;
 
 /**
