@@ -40,3 +40,13 @@ int pushStack(Stack *S, int x) {
 	}
 	return 1;
 }
+
+int popStack(Stack *S) {
+	if (S->size == 0) {
+		return 0;
+	} else {
+		S->top = &(S->elems[(S->size)-1]);
+		--(S->size);
+		return *(S->top);
+	}
+}

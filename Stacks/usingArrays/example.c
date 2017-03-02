@@ -9,13 +9,31 @@ int main(void) {
 
 	if (!pushStack(&S, 3)) {
 		printf("Stack Overflow\n");
+	} else {
+		printf("pushed: %d to S.\n", 3);
 	}
 	if (!pushStack(&S, 8)) {
 		printf("Stack Overflow\n");
+	} else {
+		printf("pushed: %d to S.\n", 8);
 	}
 
-	pushStack(&U, -5);
-	pushStack(&U, 10);
+	if (!pushStack(&U, -5)) {
+		printf("Error\n");
+	} else {
+		printf("pushed: %d to U.\n", -5);
+	}
+	if (!pushStack(&U, 10)) {
+		printf("Error\n");
+	} else {
+		printf("pushed: %d to U.\n", 10);
+	}
+
+	int poped;
+	while (poped = popStack(&S)) {
+		printf("poped: %d from S.\n", poped);
+	}
+		
 
 	return 0;
 }
