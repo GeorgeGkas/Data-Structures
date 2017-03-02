@@ -50,3 +50,19 @@ int popStack(Stack *S) {
 		return *(S->top);
 	}
 }
+
+int isEmptyStack(Stack *S) {
+	return (S->size ? 0 : 1);
+}
+
+int peekStack(Stack *S) {
+	if (S->size == 0) {
+		return 0;
+	} else {
+		return *(S->top);
+	}
+}
+
+size_t sizeOfStack(Stack *S) {
+	return S->size;
+}

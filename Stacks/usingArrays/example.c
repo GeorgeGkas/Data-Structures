@@ -29,11 +29,22 @@ int main(void) {
 		printf("pushed: %d to U.\n", 10);
 	}
 
+	printf("S is empty: %d\n", isEmptyStack(&S));
+
+	printf("Top element of S: %d\n", peekStack(&S));
+
+	printf("How many elements in our stack S? %ld\n", sizeOfStack(&S));
+
 	int poped;
 	while (poped = popStack(&S)) {
 		printf("poped: %d from S.\n", poped);
 	}
-		
 
+	printf("S is empty: %d\n", isEmptyStack(&S));
+
+	printf("Top element of S: %d\n", peekStack(&S));
+
+	printf("How many elements in our stack S? %ld\n", sizeOfStack(&S));
+		
 	return 0;
 }
