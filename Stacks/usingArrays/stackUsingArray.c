@@ -22,3 +22,21 @@ void buildStack(Stack *S, long n, ...) {
 		S->top = &(S->elems[i]);
 	}
 }
+
+int pushStack(Stack *S, int x) {
+	if (S->maxCapacity == -1) {
+		++(S->size);
+		S->elems = realloc(S->elems, sizeof(int) * (S->size));
+		S->elems[(S->size)-1] = x;
+		S->top = &(S->elems[(S->size)-1]);
+	} else {
+		if (S->size != S->maxCapacity)	{
+			++(S->size);
+			S->elems[(S->size)-1] = x;
+			S->top = &(S->elems[(S->size)-1]);
+		} else {
+			return 0;
+		}
+	}
+	return 1;
+}
