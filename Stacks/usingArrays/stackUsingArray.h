@@ -18,12 +18,12 @@ typedef struct {
 /**
  * Create an empty stack S with max capacity n.
  */
-int createStack(Stack *S, long n);
+int createStack(Stack *S, size_t n);
 
 /**
  * Creates a stack S with n elements x1,x2, x3,….
  */
-int buildStack(Stack *S, long n, ...);
+int buildStack(Stack *S, size_t n, ...);
 
 /**
  * Adds the element x to stack S.

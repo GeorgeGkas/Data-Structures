@@ -1,6 +1,6 @@
 #include "stackUsingArray.h"
 
-int createStack(Stack *S, long n) {
+int createStack(Stack *S, size_t n) {
 	S->elems = malloc(sizeof(int) * n);
 	if (S->elems == NULL) {
 		return COULD_NOT_ALLOCATE;
@@ -12,7 +12,7 @@ int createStack(Stack *S, long n) {
 	return OPERATION_SUCCESS;
 } 
 
-int buildStack(Stack *S, long n, ...) {
+int buildStack(Stack *S, size_t n, ...) {
 	S->elems = malloc(sizeof(int) * n);
 	if (S->elems == NULL) {
 		return COULD_NOT_ALLOCATE;
@@ -53,7 +53,7 @@ int pushStack(Stack *S, int x) {
 			return STACK_IS_FULL;
 		}
 	}
-	return 0;
+	return OPERATION_SUCCESS;
 }
 
 int popStack(Stack *S) {
