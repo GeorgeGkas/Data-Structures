@@ -39,11 +39,11 @@ int pushStack(Stack *S, int x) {
             return COULD_NOT_ALLOCATE;
         }
     } else {
-        if (S->size != S->maxCapacity)  {
-            stack_ex_insert(S, x);
-        } else {
+        if (S->size == S->maxCapacity)  {
             return STACK_IS_FULL;
-        }
+        } 
+
+        stack_ex_insert(S, x);        
     }
     return OPERATION_SUCCESS;
 }
@@ -51,12 +51,12 @@ int pushStack(Stack *S, int x) {
 int popStack(Stack *S) {
     if (S->size == 0) {
         return 0;
-    } else {
-        if (stack_ex_remove(S) == COULD_NOT_ALLOCATE) {
-            return COULD_NOT_ALLOCATE;
-        }
     }
 
+    if (stack_ex_remove(S) == COULD_NOT_ALLOCATE) {
+        return COULD_NOT_ALLOCATE;
+    }
+    
     return *(S->top);
 }
 
@@ -67,9 +67,9 @@ int isEmptyStack(Stack *S) {
 int peekStack(Stack *S) {
     if (S->size == 0) {
         return 0;
-    } else {
-        return *(S->top);
     }
+
+    return *(S->top);
 }
 
 size_t sizeOfStack(Stack *S) {
