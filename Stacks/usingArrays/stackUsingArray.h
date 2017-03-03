@@ -35,14 +35,14 @@ int pushStack(Stack *S, int x);
  */
 int popStack(Stack *S);
 
- /**
-  * Checks whether the stack S contains no elements.
-  * Returns either 0 (not empty) or 1 (empty).
-  */
+/**
+ * Checks whether the stack S contains no elements.
+ * Returns either 0 (not empty) or 1 (empty).
+ */
 int isEmptyStack(Stack *S);
 
 /**
- * Returns the last inserted element to stack S 
+ * Returns the last inserted element to stack S
  * without removing it.
  */
 int peekStack(Stack *S);
