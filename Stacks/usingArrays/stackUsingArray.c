@@ -3,19 +3,19 @@
 int createStack(Stack *S, long n) {
 	S->elems = malloc(sizeof(int) * n);
 	if (S->elems == NULL) {
-		return -1;
+		return COULD_NOT_ALLOCATE;
 	}
 
 	S->top = NULL;
 	S->size = 0;
 	S->maxCapacity = n;
-	return 0;
+	return OPERATION_SUCCESS;
 } 
 
 int buildStack(Stack *S, long n, ...) {
 	S->elems = malloc(sizeof(int) * n);
 	if (S->elems == NULL) {
-		return -1;
+		return COULD_NOT_ALLOCATE;
 	}
 
 	S->top = NULL;
@@ -31,7 +31,7 @@ int buildStack(Stack *S, long n, ...) {
 		S->top = &(S->elems[i]);
 	}
 
-	return 0;
+	return OPERATION_SUCCESS;
 }
 
 int pushStack(Stack *S, int x) {
@@ -39,9 +39,9 @@ int pushStack(Stack *S, int x) {
 		++(S->size);
 		S->elems = realloc(S->elems, sizeof(int) * (S->size));
 		if (S->elems == NULL) {
-			return -1;
+			return COULD_NOT_ALLOCATE;
 		}
-		
+
 		S->elems[(S->size)-1] = x;
 		S->top = &(S->elems[(S->size)-1]);
 	} else {
@@ -50,7 +50,7 @@ int pushStack(Stack *S, int x) {
 			S->elems[(S->size)-1] = x;
 			S->top = &(S->elems[(S->size)-1]);
 		} else {
-			return -1;
+			return STACK_IS_FULL;
 		}
 	}
 	return 0;

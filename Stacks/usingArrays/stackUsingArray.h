@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <errno.h>
+
+#define OPERATION_SUCCESS 0
+#define COULD_NOT_ALLOCATE -1
+#define STACK_IS_FULL -2
+#define MAX_CAPACITY_NOT_SET -3
 
 typedef struct {
 	int *elems; /* Store our stack elements using dynamic array. */
