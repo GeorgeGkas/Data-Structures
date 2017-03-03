@@ -1,14 +1,23 @@
 #include "stackUsingArray.h"
 
-void createStack(Stack *S, long n) {
+int createStack(Stack *S, long n) {
 	S->elems = malloc(sizeof(int) * n);
+	if (S->elems == NULL) {
+		return -1;
+	}
+
 	S->top = NULL;
 	S->size = 0;
 	S->maxCapacity = n;
+	return 0;
 } 
 
-void buildStack(Stack *S, long n, ...) {
+int buildStack(Stack *S, long n, ...) {
 	S->elems = malloc(sizeof(int) * n);
+	if (S->elems == NULL) {
+		return -1;
+	}
+
 	S->top = NULL;
 	S->size = 0;
 	S->maxCapacity = -1;
@@ -21,12 +30,18 @@ void buildStack(Stack *S, long n, ...) {
 		++(S->size);
 		S->top = &(S->elems[i]);
 	}
+
+	return 0;
 }
 
 int pushStack(Stack *S, int x) {
 	if (S->maxCapacity == -1) {
 		++(S->size);
 		S->elems = realloc(S->elems, sizeof(int) * (S->size));
+		if (S->elems == NULL) {
+			return -1;
+		}
+		
 		S->elems[(S->size)-1] = x;
 		S->top = &(S->elems[(S->size)-1]);
 	} else {
@@ -35,10 +50,10 @@ int pushStack(Stack *S, int x) {
 			S->elems[(S->size)-1] = x;
 			S->top = &(S->elems[(S->size)-1]);
 		} else {
-			return 0;
+			return -1;
 		}
 	}
-	return 1;
+	return 0;
 }
 
 int popStack(Stack *S) {

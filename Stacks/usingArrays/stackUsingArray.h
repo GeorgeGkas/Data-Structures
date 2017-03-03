@@ -12,12 +12,12 @@ typedef struct {
 /**
  * Create an empty stack S with max capacity n.
  */
-void createStack(Stack *S, long n);
+int createStack(Stack *S, long n);
 
 /**
  * Creates a stack S with n elements x1,x2, x3,….
  */
-void buildStack(Stack *S, long n, ...);
+int buildStack(Stack *S, long n, ...);
 
 /**
  * Adds the element x to stack S.
