@@ -1,19 +1,19 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <errno.h>
+#ifndef _usingArrays_stackUsingArrays_H
+#define _usingArrays_stackUsingArrays_H
 
-#define OPERATION_SUCCESS 0
-#define COULD_NOT_ALLOCATE -1
+#include <stdarg.h>
+
+#ifndef _usingArrays_stackStruct_H
+#include "stackStruct.h"
+#endif
+
+#ifndef _usingArrays_stack_exalloc_H
+#include "stack_exalloc/stack_exalloc.h"
+#endif
+
 #define STACK_IS_FULL -2
 #define MAX_CAPACITY_NOT_SET -3
 
-typedef struct {
-	int *elems; /* Store our stack elements using dynamic array. */
-	int *top; /* The top element of our stack. */
-	size_t size; /* The number of elements exist on our stack. */
-	long maxCapacity; /* The max capacity of our stack. (-1) If we don't set it. */
-} Stack;
 
 /**
  * Create an empty stack S with max capacity n.
@@ -51,3 +51,5 @@ int peekStack(Stack *S);
  * Returns the number of elements in stack S.
  */
 size_t sizeOfStack(Stack *S);
+
+#endif

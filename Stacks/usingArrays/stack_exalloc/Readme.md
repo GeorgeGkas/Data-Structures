@@ -61,7 +61,7 @@ int stack_ex_insert(Stack *S, int x)
 
 #### Return Value
 
-This function returns `0` if the operation succeeded and `-1` in other case.
+This function returns `0` if the operation succeeded and `COULD_NOT_ALLOCATE` in other case.
 
 ### stack_ex_remove()
 
@@ -76,4 +76,4 @@ int stack_ex_remove(Stack *S)
 
 #### Return Value
 
-This function returns `0` if the operation succeeded and `-1` in other case.
+This function returns `0` if the operation succeeded and `COULD_NOT_ALLOCATE` in other case.

@@ -1,4 +1,6 @@
+#ifndef _usingArrays_stackUsingArrays_H
 #include "stackUsingArray.h"
+#endif
 
 int main(void) {
 	Stack S, U;
@@ -60,6 +62,47 @@ int main(void) {
 	printf("Top element of S: %d\n", peekStack(&S));
 
 	printf("How many elements in our stack S? %ld\n", sizeOfStack(&S));
+
+	retval = pushStack(&S, 3);
+	if (retval < 0) {
+		printf("Stack Overflow\n");
+	} else {
+		printf("pushed: %d to S.\n", 3);
+	}
+
+	retval = pushStack(&S, 3);
+	if (retval < 0) {
+		printf("Stack Overflow\n");
+	} else {
+		printf("pushed: %d to S.\n", 3);
+	}
+
+	retval = pushStack(&S, 3);
+	if (retval < 0) {
+		printf("Stack Overflow\n");
+	} else {
+		printf("pushed: %d to S.\n", 3);
+	}
+
+	retval = pushStack(&S, 3);
+	if (retval < 0) {
+		printf("Stack Overflow\n");
+	} else {
+		printf("pushed: %d to S.\n", 3);
+	}
+
+	retval = pushStack(&S, 3);
+	if (retval < 0) {
+		printf("Stack Overflow\n");
+	} else {
+		printf("pushed: %d to S.\n", 3);
+	}
+
+	printf("Allocated capacity for stack S: %ld\n", S.currAllocatedSize);
+
+	printf("poped: %d from stack S. \n", popStack(&S));
+
+	printf("Allocated capacity for stack S: %ld\n", S.currAllocatedSize);
 		
 	return 0;
 }

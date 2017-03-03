@@ -8,47 +8,39 @@ int createStack(Stack *S, size_t n) {
 
 	S->top = NULL;
 	S->size = 0;
-	S->maxCapacity = n;
+	S->maxCapacity = S->currAllocatedSize = n;
 	return OPERATION_SUCCESS;
 } 
 
 int buildStack(Stack *S, size_t n, ...) {
-	S->elems = malloc(sizeof(int) * n);
-	if (S->elems == NULL) {
-		return COULD_NOT_ALLOCATE;
-	}
-
+	S->elems = NULL;
 	S->top = NULL;
 	S->size = 0;
-	S->maxCapacity = -1;
+	S->currAllocatedSize = 0;
+	S->maxCapacity = MAX_CAPACITY_NOT_SET;
 
 	va_list stackElems;
 	va_start(stackElems, n);
 
+	int elem;
 	for (size_t i = 0; i < n; ++i) {
-		S->elems[i] = va_arg(stackElems, int);
-		++(S->size);
-		S->top = &(S->elems[i]);
+		elem = va_arg(stackElems, int);
+		if (stack_ex_insert(S, elem) == COULD_NOT_ALLOCATE) {
+			return COULD_NOT_ALLOCATE;
+		}
 	}
 
 	return OPERATION_SUCCESS;
 }
 
 int pushStack(Stack *S, int x) {
-	if (S->maxCapacity == -1) {
-		++(S->size);
-		S->elems = realloc(S->elems, sizeof(int) * (S->size));
-		if (S->elems == NULL) {
+	if (S->maxCapacity == MAX_CAPACITY_NOT_SET) {
+		if (stack_ex_insert(S, x) == COULD_NOT_ALLOCATE) {
 			return COULD_NOT_ALLOCATE;
 		}
-
-		S->elems[(S->size)-1] = x;
-		S->top = &(S->elems[(S->size)-1]);
 	} else {
 		if (S->size != S->maxCapacity)	{
-			++(S->size);
-			S->elems[(S->size)-1] = x;
-			S->top = &(S->elems[(S->size)-1]);
+			stack_ex_insert(S, x);
 		} else {
 			return STACK_IS_FULL;
 		}
@@ -60,10 +52,12 @@ int popStack(Stack *S) {
 	if (S->size == 0) {
 		return 0;
 	} else {
-		S->top = &(S->elems[(S->size)-1]);
-		--(S->size);
-		return *(S->top);
+		if (stack_ex_remove(S) == COULD_NOT_ALLOCATE) {
+			return COULD_NOT_ALLOCATE;
+		}
 	}
+
+	return *(S->top);
 }
 
 int isEmptyStack(Stack *S) {
