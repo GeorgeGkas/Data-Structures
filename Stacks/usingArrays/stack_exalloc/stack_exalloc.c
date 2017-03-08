@@ -4,7 +4,7 @@ int stack_ex_insert(Stack *S, int x) {
     ++(S->size);
 
     if (S->elems == NULL) {
-        S->elems = malloc(sizeof(int) * (S->size));
+        S->elems = malloc(sizeof(int) * S->size);
         S->currAllocatedSize = S->size;
     } else if (S->size > S->currAllocatedSize) {
         S->currAllocatedSize *= 2;
