@@ -13,3 +13,7 @@ int peekQueue(Queue *Q) {
 
 	return *(Q->front);
 }
+
+int isEmptyQueue(Queue *Q) {
+	return (Q->size ? 0 : 1);
+}

@@ -17,4 +17,10 @@ void createQueue(Queue *Q);
  */
 int peekQueue(Queue *Q);
 
+/**
+ * checks whether the queue Q contains no elements 
+ * and returns either 0 (not empty) or 1 (empty).
+ */
+int isEmptyQueue(Queue *Q);
+
 #endif
