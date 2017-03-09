@@ -3,6 +3,8 @@
 #endif
 
 int main(void) {
+	Queue Q;
+	createQueue(&Q);
 
 	return 0;
 }

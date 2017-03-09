@@ -5,4 +5,11 @@
 #include "queueStruct.h"
 #endif
 
+#include <stdlib.h>
+
+/**
+ * Create an empty queue Q.
+ */
+void createQueue(Queue *Q);
+
 #endif
