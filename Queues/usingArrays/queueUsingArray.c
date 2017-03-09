@@ -17,3 +17,7 @@ int peekQueue(Queue *Q) {
 int isEmptyQueue(Queue *Q) {
 	return (Q->size ? 0 : 1);
 }
+
+size_t sizeOfQueue(Queue *Q) {
+	return Q->size;
+}

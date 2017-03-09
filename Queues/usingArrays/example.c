@@ -7,6 +7,7 @@ int main(void) {
 	createQueue(&Q);
 
 	printf("Queue is empty: %d\n", isEmptyQueue(&Q));
+	printf("Size of Queue is %ld\n", sizeOfQueue(&Q));
 	printf("The front element in our queue is: %d\n", peekQueue(&Q));
 
 

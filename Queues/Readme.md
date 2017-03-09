@@ -14,6 +14,8 @@
 
 **isEmptyQueue(Q)**: checks whether the queue **Q** contains no elements and returns either `0` (not empty) or `1` (empty).
 
+**sizeOfQueue(Q)**: returns the number of elements in queue **Q**.
+
 ### Implementing Queues in C
 
 #### Using Arrays (circular buffer)

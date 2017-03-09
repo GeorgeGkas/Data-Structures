@@ -23,4 +23,9 @@ int peekQueue(Queue *Q);
  */
 int isEmptyQueue(Queue *Q);
 
+/**
+ * Returns the number of elements in queue Q.
+ */
+size_t sizeOfQueue(Queue *Q);
+
 #endif
