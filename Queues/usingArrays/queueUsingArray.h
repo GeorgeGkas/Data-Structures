@@ -12,4 +12,9 @@
  */
 void createQueue(Queue *Q);
 
+/**
+ * Returns the front element of the queue Q.
+ */
+int peekQueue(Queue *Q);
+
 #endif
