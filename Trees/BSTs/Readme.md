@@ -11,8 +11,11 @@ Bellow we provide a simple instance. As you can see the above criteria are met.
 ### Basic Operations
 
 **initBST(rootBST)**: for a given **rootBST** node, we initialize the BST tree.
+
 **insertBSTNode(rootBST, x)**: insert item **x** to BST tree **rootBST**, if **x** is not exist.
+
 **deleteBSTNode(rootBST, x)**: remove item **x** from BST tree **rootBST**, id **x** exist.
+
 **searchBST(rootBST, x)**: search item **x** in BST tree **rootBST**.
 
 ### BST Traversal
