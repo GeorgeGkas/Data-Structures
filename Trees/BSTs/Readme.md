@@ -24,8 +24,7 @@ Bellow we discuss some traversal methods we can use to get the nodes from a BST 
 **inOrderBST(rootBST)**: traverse BST tree **rootBST** with in-order form.
 
 1. Traverse the left subtree by recursively calling **inOrderBST**.
-2. Check **node != empty**.
-2.1. Visit the node.
+2. If **node != empty** then visit the node.
 3. Traverse the right subtree by recursively calling **inOrderBST**.
 
 ![BST In-order Traversal example](http://storage7.static.itmages.com/i/17/0429/h_1493477203_3052333_2cfca09af8.png)
@@ -36,8 +35,7 @@ Bellow we discuss some traversal methods we can use to get the nodes from a BST 
 
 **preOrderBST(rootBST)**: traverse BST tree **rootBST** with pre-order form.
 
-1. Check **node != empty**.
-1.1. Visit the node.
+1. If **node != empty** then visit the node.
 2. Traverse the left subtree by recursively calling **inOrderBST**.
 3. Traverse the right subtree by recursively calling **inOrderBST**.
 
@@ -49,7 +47,6 @@ Bellow we discuss some traversal methods we can use to get the nodes from a BST 
 
 1. Traverse the left subtree by recursively calling **inOrderBST**.
 2. Traverse the right subtree by recursively calling **inOrderBST**.
-3. Check **node != empty**.
-3.1. Visit the node.
+3. If **node != empty** then visit the node.
 
 ![BST post-order Traversal example](http://storage3.static.itmages.com/i/17/0429/h_1493477911_5561446_23884aa4bf.png)
