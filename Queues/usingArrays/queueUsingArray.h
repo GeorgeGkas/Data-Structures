@@ -5,7 +5,9 @@
 #include "queueStruct.h"
 #endif
 
-#include <stdlib.h>
+#ifndef _usingArrays_queue_exalloc_H
+#include "queue_exalloc/queue_exalloc.h"
+#endif
 
 /**
  * Create an empty queue Q.
@@ -27,5 +29,15 @@ int isEmptyQueue(Queue *Q);
  * Returns the number of elements in queue Q.
  */
 size_t sizeOfQueue(Queue *Q);
+
+/**
+ * Qnqueue element x to the rear of Q.
+ */
+int enQueue(Queue *Q, int x);
+
+/**
+ * Dequeue the front element of Q, returning it.
+ */
+int deQueue(Queue *Q);
 
 #endif
